@@ -1,7 +1,8 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
+<!DOCTYPE html>
+<html>
+
+<head>
+   <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,12 +12,20 @@
     <!-- This is your own CSS style sheet -->
     <link href="/static/styles.css" rel="stylesheet">
 
-    <title>Portfolio Website</title>
-  </head>
-  <body>
+	<title>My website</title>
+</head>
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">My Data Science Portfolio</a>
+
+<body>
+	<!--<p align="center"><big><b>Hello world! This is my website.</b></big> <br></p>
+	<br />
+
+	<p align="center"><i><em>In development and/or in maintenance...<em></i></p>
+	<br /> -->
+
+	<div class="navbar">
+       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Hantz Peter B. Thermoris</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -32,26 +41,29 @@
               <a class="nav-link" href="#">Blog</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About me</a>
+              <a class="nav-link" href="cv_html.html">About me</a>
             </li>
           </ul>
         </div>
       </nav>
+    </div>
 
-      <main>
-        {% block main %}{% endblock %}
-      </main>
+	
+	<!--<p align="center">
+		<form action="nba_api.ipynb" target="_blank">
+	    	<input type="submit" value="Go to my resume" />
+		</form>
+	</p>-->
+
+	<footer>
+		<a href="https://www.linkedin.com/in/hantz-peter-b-thermoris/" target="_blank"><img src="img/LinkedIn.png" width="30" height="30" hspace="5"></a>
+
+		<a href="https://github.com/hp8990/hp8990.github.io/" target="_blank"><img src="img/GitHub.jpg" width="30" height="30" hspace="5"></a>
 
 
-      <footer class="small text-center text-muted">
-        <p class="copyright">Copyright &copy; 2020 | Your Name</p>
-      </footer>
+		<a href="#" target="_blank"><img src="img/youtube.png" width="30" height="30" hspace="5"></a>
 
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-  </body>
+		<a href="https://www.kaggle.com/thermorishantzpeter/account" target="_blank"><img src="img/kaggle.png" width="30" height="30" hspace="5"></a>
+	</footer>
+</body>
 </html>
