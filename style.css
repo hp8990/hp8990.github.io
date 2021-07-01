@@ -9,12 +9,15 @@
 	position: sticky;
 	top: 0;
 	z-index: 10;
+	font-weight: bolder;
+	font-size: 16px;
 }
 
 .navbar-brand
 {
 	height: 40 px;
 	padding-left: 30 px;
+	font-display: ;
 }
 
 .navbar-nav li
@@ -30,7 +33,7 @@
 
 #mynavbar ul li a:hover
 {
-	color: #007bff!important;
+	color: blue;
 }
 
 .navbar
@@ -51,7 +54,7 @@
 }
 
 
-
+/*----------------- Slider ------------------*/
 #slider
 {
 	width: 100%;
@@ -60,14 +63,47 @@
 .carousel-caption
 {
 	top: 50%;
-	transform: translateY(-50%);
+	transform: translateY(-20%);
 	bottom: initial!important;
 	background: rgba(0, 0, 0);
+	color: green;
+	font-size: 20px;
+}
+
+.carousel-inner
+{
+	bottom: initial!important;
 }
 
 .carousel-caption h5 p
 {
-	font-size: 50px;
-	color: #ff0055;
-	background: #000000;
+	
+	color: greenyellow;
+	font-size: 0px;
+}
+
+/*#myslider
+{
+	background: rgba(0, 0, 0);
+}*/
+
+.carousel-indicators
+{
+	color: black;
+	background: gray;
+}
+
+/*--------------- Contact ------------------*/
+
+#contact
+{
+	background: #eeeeee;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	color: #999999;
+}
+
+.container
+{
+	margin-top: 60px;
 }
