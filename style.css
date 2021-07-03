@@ -38,7 +38,7 @@
 
 .navbar
 {
-	background: #fff;
+	background: #aaa;
 }
 
 .navbar-toggler
@@ -49,7 +49,7 @@
 .nav-link
 {
 	color: #555!important;
-	font-weight: 600;
+	font-weight: bold;
 	font-size: 16px!important;
 }
 
@@ -58,6 +58,7 @@
 #slider
 {
 	width: 100%;
+	color: black;
 }
 
 .carousel-caption
@@ -65,45 +66,126 @@
 	top: 50%;
 	transform: translateY(-20%);
 	bottom: initial!important;
-	background: rgba(0, 0, 0);
-	color: green;
-	font-size: 20px;
+	/*background: darkgreen;*/
+	font-size: 15px;
+	color: #dd9822!important;
 }
 
 .carousel-inner
 {
 	bottom: initial!important;
+	background: black;
 }
 
-.carousel-caption h5 p
+.carousel-item img
 {
-	
-	color: greenyellow;
-	font-size: 0px;
-}
+ text-align: center;
+ width: 100!important;
+ height: 480;
+ max-height: 480px;
+ margin: auto;
+} 
 
-/*#myslider
-{
-	background: rgba(0, 0, 0);
-}*/
 
 .carousel-indicators
 {
 	color: black;
-	background: gray;
+	/*background: gray;*/
 }
 
-/*--------------- Contact ------------------*/
+/*--------------- Contact me ------------------*/
 
 #contact
 {
-	background: #eeeeee;
-	padding-top: 40px;
-	padding-bottom: 40px;
-	color: #999999;
+	background: #bababa;
+	padding-top: 0px;
+	padding-bottom: 20px;
+	color: #444;
+	text-align: center;
+	margin-top: 10px;
+
+}
+
+.row
+{
+	text-align: center;
+	justify-content: center;
+}
+
+.contact-form
+{
+	padding: 5px;
+}
+
+.form-control
+{
+	border: none;
+	border-radius: 0!important;
 }
 
 .container
 {
-	margin-top: 60px;
+	margin-top: 50px;
+}
+
+::placeholder
+{
+	color: #555555;
+}
+
+
+/*--------------- footer ---------------*/
+#footer
+{
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	font-weight: bold;
+}
+
+.fa {
+  padding: 10px;
+  font-size: 30px;
+  width: 40px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
+  border-color: #445599;
+}
+
+/*Thanks to : https://www.w3schools.com/howto/howto_css_social_media_buttons.asp*/
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.5;
+}
+
+/* Set a specific color for each brand */
+}
+
+.fa-linkedin-in 
+{
+  background: white;
+  color: darkred;
+  padding: 10px;
+  font-size: 30px;
+  border-radius: 50%;
+}
+
+.fa-github
+{
+  background: black;
+  color: white;
+}
+
+.fa-twitter 
+{
+  background: black;
+  color: white;
+}
+
+.fa-youtube-play 
+{
+  background: black;
+  color: white;
 }
