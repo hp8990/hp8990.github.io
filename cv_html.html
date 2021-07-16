@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>My curriculum vitae</title>
+
+    <!---------------- My own css style link -------------->
+  <link rel="stylesheet" type="text/css" href="cv-style.css">
 </head>
-<body>
+<body id="all">
     <!--<div>
         <nav>
             <ul>
@@ -18,11 +21,11 @@
     </div>-->
 
     
-        <img src="img/hp__.png" width="15%"><br />
-        <strong><big>A propos de moi</big></strong>
+    <img src="img/hp__.png" width="25%"><br />
+    <!--<strong><big>A propos de moi</big></strong>-->
 
                 <!-- PROFIL-->
-    <section>
+    <section class="heading">
         <h1><big>PROFIL</big></h1>
         <hr width="100%/">
         <p>Diplômé en génie électronique, je suis actuellement en M2 - Biométrie et Vision Intelligente
@@ -32,7 +35,7 @@
     </section>
 
                <!-- EXPERIENCES PROFESSIONNELLES--> 
-    <section>
+    <section class="heading">
         <h1><big>EXPERIENCES PROFESSIONNELLES</big></h1>
         <hr width="100%">
 
@@ -55,7 +58,7 @@
     </section>
 
                 <!-- FORMATIONS ET CERTIFICATIONS-->
-    <section>
+    <section class="heading">
         <h1><big>FORMATIONS ET CERTIFICATIONS</big></h1>
         <hr width="100%">
         <ul>
@@ -78,7 +81,7 @@
     </section>
 
                 <!-- PROJETS ACADEMIQUES ET PERSONNELS-->
-    <section>
+    <section class="heading">
         <h1><big>PROJETS ACADEMIQUES ET PERSONNELS</big></h1>
         <hr width="100%">
         <ul>
@@ -90,7 +93,7 @@
     </section>
 
                     <!-- COURS EN LIGNE-->
-    <section>
+    <section class="heading">
         <h1><big>COURS EN LIGNE</big></h1>
         <hr width="100%">
         <ul>
@@ -103,11 +106,11 @@
     </section>
 
                     <!-- COMPETENCES-->
-    <section>
+    <section class="heading">
         <h1><big>COMPETENCES</big></h1>
         <hr width="100%">
-        <table border="2" bgcolor="yellow">
-            <tr>
+        <table border="0" bgcolor=#ddddff>
+            <tr >
                 <td><b>Computer Vision</b></td>
                 <td><b>Deep Learning (CNN, RNN)</b></td>
                 <td><b>Machine Learning (<i>supervisé et non-supervisé</i>)</b></td>
@@ -117,11 +120,16 @@
                 <td><b>Administration de base de données</b></td>
                 <td>Techniques de Biométrie</td>
             </tr>
-        </table>>      
+            <tr>
+                <td><b>Analyse et extraction de données(Web Scraping)</b></td>
+                <td><b>Visualisation de données</b></td>
+                <td>Concepts fondamentaux du Cloud</td>
+            </tr>
+        </table>
     </section>
 
                     <!-- OUTILS-->
-    <section>
+    <section class="heading">
         <h1><big>OUTILS</big></h1>
         <hr width="100%">
         <p><b><font color="#0022EE">Tensorflow, Keras, Pytorch</font></b>,<br /> Numpy, <b>Matplotlib, <font color="#0022EE">Pandas</font></b>,<br /> Dlib, Scikit-Learn, <br /><b>Seaborn</b>, Scipy,<br />
@@ -129,7 +137,7 @@
     </section>
 
                     <!-- PROGRAMMATION-->
-    <section>
+    <section class="heading">
         <h1><big>PROGRAMMATION</big></h1>
         <hr width="100%">
         <table border="2">
@@ -138,7 +146,7 @@
                 <th>NIVEAU</th>
             </tr>
             <tr>
-                <td><b><font color="#0022EE">Python</font></b></td>
+                <td><b>Python</b></td>
                 <td><img src="img/4 stars.jpg"></td>
             </tr>
 
@@ -160,7 +168,7 @@
     </section>
 
                     <!-- CONNAISSANCES LINGUISTIQUES (bulates)-->
-    <section>
+    <section class="heading">
         <h1><big>CONNAISSANCES LINGUISTIQUES (bulates)</big></h1>
         <hr width="100%">
         <ul>
@@ -171,7 +179,7 @@
     </section>
 
                     <!-- INTERETS-->
-    <section>
+    <section class="heading">
         <h1><big>INTERETS</big></h1>
         <hr width="100%">
         <!--<a href="https://www.linkedin.com/in/hantz-peter-b-thermoris/" target="_blank">  <img src="LinkedIn.png" width="3%"> </a>-->
