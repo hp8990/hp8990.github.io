@@ -63,7 +63,7 @@
 
 .carousel-caption
 {
-	top: 70%;
+	top: 100%;
 	transform: translateY(-20%);
 	bottom: initial!important;
 	/*background: darkgreen;*/
@@ -146,6 +146,7 @@
 	text-align: center;
 	font-weight: bold;
 	background: black;
+	color: whitesmoke;
 }
 
 .fa {
@@ -173,24 +174,44 @@
   background: white;
   color: darkred;
   padding: 10px;
-  font-size: 30px;
+  font-size: 60px;
   border-radius: 50%;
+  size: 50px!important;
 }
 
 .fa-github
 {
   background: black;
   color: white;
+  size: 50px!important;
 }
 
 .fa-twitter 
 {
   background: black;
   color: white;
+  size: 50px!important;
 }
 
 .fa-youtube-play 
 {
   background: black;
   color: white;
+  size: 50px!important;
+}
+
+
+
+
+
+/*------------------------PORTFOLIO STYLE----------------------*/
+.center
+{
+	font-size: 30px;
+	font-weight: bolder;
+	text-align: center;
+	text-decoration-color: darkred;
+	/*padding-top: 25%;*/
+	margin-top: 25%;
+	margin-bottom: 25%;
 }
