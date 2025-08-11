@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hantz Peter B Thermoris — Portfolio</title>
+  <meta name="description" content="Portfolio of Hantz Peter B Thermoris — developer, problem solver. HTML / CSS / JS static site template." />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicons (place your favicon.ico in /) -->
+  <link rel="icon" href="/favicon.ico" />
+
+  <style>
+    /* --------------------
+       Variables & Reset
+       -------------------- */
+    :root{
+      --bg: #f8f9fb;
+      --card: #ffffff;
+      --text: #0f1720;
+      --muted: #64748b;
+      --accent: #0b84ff; /* calm blue accent */
+      --glass: rgba(255,255,255,0.6);
+      --radius: 12px;
+      --max-width: 1100px;
+      --section-pad: 64px;
+      --grid-gap: 24px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color:var(--text);
+      background:linear-gradient(180deg,var(--bg),#ffffff 60%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+
+    /* --------------------
+       Header / Nav
+       -------------------- */
+    header{backdrop-filter:saturate(120%) blur(6px);position:sticky;top:12px;z-index:50}
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-radius:14px
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0066cc);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:'Montserrat'}
+    .brand h1{font-size:16px;margin:0}
+    nav ul{display:flex;gap:18px;align-items:center;margin:0;padding:0;list-style:none}
+    nav a{color:var(--muted);font-weight:600;font-size:14px}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:white;font-weight:600;font-size:14px}
+
+    /* --------------------
+       Hero
+       -------------------- */
+    .hero{padding:var(--section-pad) 0 40px;display:grid;grid-template-columns:1fr 360px;gap:40px;align-items:center}
+    .hero .intro h2{font-family:'Montserrat';font-size:38px;margin:0 0 12px}
+    .hero .intro p{color:var(--muted);margin:0 0 20px}
+    .hero .cta{display:flex;gap:12px}
+
+    .profile-card{background:var(--card);border-radius:16px;padding:20px;box-shadow:0 8px 30px rgba(16,24,40,0.06);display:flex;flex-direction:column;align-items:center;gap:12px}
+    .avatar{width:120px;height:120px;border-radius:999px;overflow:hidden;flex-shrink:0}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+    .profile-meta{display:flex;flex-direction:column;align-items:center}
+    .profile-meta h3{margin:6px 0 0}
+    .role{color:var(--muted);font-size:14px}
+
+    /* --------------------
+       Sections
+       -------------------- */
+    section{padding:48px 0}
+    .section-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    .section-title h3{margin:0;font-size:20px;font-family:'Montserrat'}
+    .section-title p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Skills grid */
+    .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--grid-gap)}
+    .skill{background:var(--card);padding:14px;border-radius:12px;display:flex;gap:12px;align-items:center;box-shadow:0 6px 18px rgba(15,23,42,0.03)}
+    .skill svg{width:28px;height:28px;flex-shrink:0}
+    .skill strong{display:block}
+    .skill small{color:var(--muted);font-size:13px}
+
+    /* Projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .project{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(2,6,23,0.06);display:flex;flex-direction:column}
+    .project .thumb{height:160px;background:linear-gradient(180deg, #eef7ff, #f6fbff);display:flex;align-items:center;justify-content:center}
+    .project .content{padding:16px;flex:1;display:flex;flex-direction:column;gap:8px}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid rgba(15,23,42,0.06);background:transparent}
+    .project .actions{display:flex;gap:8px;padding:12px}
+
+    /* Experience timeline */
+    .timeline{display:flex;flex-direction:column;gap:18px}
+    .exp{display:flex;gap:14px;align-items:flex-start}
+    .exp .dot{width:12px;height:12px;background:var(--accent);border-radius:999px;margin-top:6px}
+    .exp .info{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.03);flex:1}
+    .exp .info .meta{color:var(--muted);font-size:13px}
+
+    /* Contact */
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    form{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.06)}
+    label{display:block;font-size:13px;margin-bottom:8px}
+    input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef8;background:transparent;font-size:14px}
+    textarea{min-height:140px}
+    .social{display:flex;gap:10px;flex-direction:column}
+    .social a{display:inline-flex;align-items:center;gap:8px;padding:10px;border-radius:10px;border:1px solid rgba(2,6,23,0.04);background:var(--card)}
+
+    /* Footer */
+    footer{text-align:center;padding:28px 0;color:var(--muted);font-size:14px}
+
+    /* Utilities */
+    .muted{color:var(--muted)}
+    .inline{display:inline-flex;gap:8px;align-items:center}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:20px}
+      .contact-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:420px){
+      .hero .intro h2{font-size:28px}
+    }
+
+    /* Simple fade-in on load */
+    .reveal{opacity:0;transform:translateY(8px);transition:all 520ms cubic-bezier(.2,.9,.2,1)}
+    .reveal.is-visible{opacity:1;transform:none}
+
+  </style>
+</head>
+<body>
+  <header class="container">
+    <div class="nav">
+      <div class="brand">
+        <div class="logo">HP</div>
+        <div>
+          <h1 style="font-size:14px;margin:0">Hantz Peter B Thermoris</h1>
+          <div class="muted" style="font-size:12px">Developer • Problem Solver</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#projects">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a class="btn" href="#contact">Contact Me</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="intro">
+        <div class="section-title">
+          <h3>Hi, I’m Hantz 👋</h3>
+        </div>
+        <h2 class="reveal">I design and build clean, reliable web experiences.</h2>
+        <p class="muted reveal">I focus on simple, robust front-end development using HTML, CSS and vanilla JavaScript. I ship performant sites that are easy to maintain and accessible.</p>
+
+        <div class="cta reveal">
+          <a class="btn" href="#projects">View My Work</a>
+          <a style="display:inline-flex;align-items:center;gap:8px;padding:10px;border-radius:10px;border:1px solid rgba(2,6,23,0.06)" href="/resume.pdf" download>Download CV</a>
+        </div>
+
+        <div style="margin-top:28px" class="reveal muted">
+          <strong>Currently:</strong> Open for freelance & contract work
+        </div>
+      </div>
+
+      <aside class="profile-card reveal">
+        <div class="avatar">
+          <!-- Replace with your actual photo at /images/profile.jpg -->
+          <img src="/images/profile.jpg" alt="Hantz Peter B Thermoris">
+        </div>
+        <div class="profile-meta">
+          <h3>Hantz Peter B Thermoris</h3>
+          <div class="role">Front-End Developer</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:6px">
+          <a href="https://github.com/hp8990" target="_blank" rel="noopener" class="muted">GitHub</a>
+          <a href="#contact" class="muted">Contact</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-title">
+        <h3>Selected Projects</h3>
+        <p class="muted">A curated selection of projects — each one includes the challenge and technologies used.</p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article class="project reveal">
+          <div class="thumb">
+            <!-- put a screenshot at /images/project1.png -->
+            <img src="/images/project1.png" alt="Project 1 screenshot" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="content">
+            <div style="display:flex;justify-content:space-between;align-items:start">
+              <div>
+                <h4 style="margin:0">Project One</h4>
+                <div class="muted" style="font-size:13px;margin-top:6px">Redesign and optimization for a content-heavy site.</div>
+              </div>
+              <div class="muted" style="font-size:13px">2024</div>
+            </div>
+
+            <p class="muted" style="margin:6px 0 0;font-size:14px">Improved load performance by 45% while modernizing UI components and accessibility.</p>
+
+            <div class="tags" style="margin-top:8px">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">Vanilla JS</span>
+            </div>
+          </div>
+          <div class="actions" style="padding:12px;display:flex;gap:8px;align-items:center">
+            <a class="btn" href="#" target="_blank">Live</a>
+            <a style="padding:10px;border-radius:10px;border:1px solid rgba(2,6,23,0.06)" href="#" target="_blank">Code</a>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project reveal">
+          <div class="thumb">
+            <img src="/images/project2.png" alt="Project 2 screenshot" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="content">
+            <div style="display:flex;justify-content:space-between;align-items:start">
+              <div>
+                <h4 style="margin:0">Project Two</h4>
+                <div class="muted" style="font-size:13px;margin-top:6px">Interactive dashboard for data insights.</div>
+              </div>
+              <div class="muted" style="font-size:13px">2023</div>
+            </div>
+            <p class="muted" style="margin:6px 0 0;font-size:14px">Built a lightweight component set and charts using SVG and vanilla JS — no libraries.</p>
+
+            <div class="tags" style="margin-top:8px">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">SVG</span>
+            </div>
+          </div>
+          <div class="actions" style="padding:12px;display:flex;gap:8px;align-items:center">
+            <a class="btn" href="#" target="_blank">Live</a>
+            <a style="padding:10px;border-radius:10px;border:1px solid rgba(2,6,23,0.06)" href="#" target="_blank">Code</a>
+          </div>
+        </article>
+
+        <!-- Project 3 (placeholder) -->
+        <article class="project reveal">
+          <div class="thumb">
+            <img src="/images/project3.png" alt="Project 3 screenshot" style="width:100%;height:100%;object-fit:cover">
+          </div>
+          <div class="content">
+            <div style="display:flex;justify-content:space-between;align-items:start">
+              <div>
+                <h4 style="margin:0">Project Three</h4>
+                <div class="muted" style="font-size:13px;margin-top:6px">Small utility and micro-interactions library.</div>
+              </div>
+              <div class="muted" style="font-size:13px">2022</div>
+            </div>
+            <p class="muted" style="margin:6px 0 0;font-size:14px">A tiny collection of accessible UI utilities with minimal JS footprint.</p>
+
+            <div class="tags" style="margin-top:8px">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JS</span>
+            </div>
+          </div>
+          <div class="actions" style="padding:12px;display:flex;gap:8px;align-items:center">
+            <a class="btn" href="#" target="_blank">Live</a>
+            <a style="padding:10px;border-radius:10px;border:1px solid rgba(2,6,23,0.06)" href="#" target="_blank">Code</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ABOUT / SKILLS -->
+    <section id="about">
+      <div class="section-title">
+        <h3>About</h3>
+        <p class="muted">Short professional summary and areas of focus.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start">
+        <div class="reveal">
+          <p class="muted">I'm a front-end developer specialising in building maintainable, accessible, and fast user interfaces. My work emphasises semantic HTML, modern CSS techniques, and pragmatic JavaScript. I enjoy collaborating with designers and back-end engineers to deliver polished production-ready products.</p>
+
+          <h4 style="margin-top:18px">What I bring</h4>
+          <ul style="color:var(--muted);line-height:1.7">
+            <li>Performance-focused, progressive enhancement approach</li>
+            <li>Accessible components with ARIA and keyboard support</li>
+            <li>Maintainable CSS (BEM-inspired patterns) and modular JS</li>
+          </ul>
+        </div>
+
+        <aside class="profile-card reveal">
+          <div style="font-size:14px;font-weight:700">Contact</div>
+          <div class="muted" style="font-size:13px">Available for freelance and contract work</div>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-direction:column">
+            <a href="mailto:you@example.com">you@example.com</a>
+            <a href="https://github.com/hp8990" target="_blank" rel="noopener">github.com/hp8990</a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener">linkedin.com/in/your-profile</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-title">
+        <h3>Skills</h3>
+        <p class="muted">Tools and technologies I use every day.</p>
+      </div>
+
+      <div class="skills-grid reveal">
+        <div class="skill">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="3" width="20" height="18" rx="2" stroke="currentColor" stroke-width="1.2"/></svg>
+          <div>
+            <strong>HTML</strong>
+            <small class="muted">Semantic markup</small>
+          </div>
+        </div>
+
+        <div class="skill">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.2"/></svg>
+          <div>
+            <strong>CSS</strong>
+            <small class="muted">Responsive & modern layout</small>
+          </div>
+        </div>
+
+        <div class="skill">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12h16M4 6h16M4 18h16" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <div>
+            <strong>JavaScript</strong>
+            <small class="muted">Vanilla, DOM APIs</small>
+          </div>
+        </div>
+
+        <div class="skill">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M12 5v14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          <div>
+            <strong>Accessibility</strong>
+            <small class="muted">A11y best practices</small>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-title">
+        <h3>Experience</h3>
+        <p class="muted">Recent roles and contributions.</p>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="exp">
+          <div class="dot" aria-hidden="true"></div>
+          <div class="info">
+            <div style="display:flex;justify-content:space-between;align-items:start">
+              <div>
+                <strong>Senior Front-End Developer</strong>
+                <div class="meta muted">Company Name</div>
+              </div>
+              <div class="meta muted">2021 — Present</div>
+            </div>
+            <p class="muted" style="margin-top:8px">Working on UI performance, accessibility, and component systems for a high-traffic product.</p>
+          </div>
+        </div>
+
+        <div class="exp">
+          <div class="dot" aria-hidden="true"></div>
+          <div class="info">
+            <div style="display:flex;justify-content:space-between;align-items:start">
+              <div>
+                <strong>Front-End Developer</strong>
+                <div class="meta muted">Another Company</div>
+              </div>
+              <div class="meta muted">2018 — 2021</div>
+            </div>
+            <p class="muted" style="margin-top:8px">Built customer-facing applications and internal tools focusing on usability and maintainability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">
+        <h3>Contact</h3>
+        <p class="muted">Let's work together — send a short message and I'll reply within a couple of days.</p>
+      </div>
+
+      <div class="contact-grid">
+        <form id="contactForm" class="reveal" onsubmit="handleContact(event)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+            <button type="submit" class="btn">Send message</button>
+            <div id="formStatus" class="muted" aria-live="polite"></div>
+          </div>
+        </form>
+
+        <aside class="reveal">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.05)">
+              <div style="font-weight:700">Reach out</div>
+              <div class="muted">Prefer email? Send a note to</div>
+              <a href="mailto:you@example.com">you@example.com</a>
+            </div>
+
+            <div style="background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.05)">
+              <div style="font-weight:700">Links</div>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+                <a href="https://github.com/hp8990" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+              </div>
+            </div>
+
+          </div>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>&copy; <span id="year"></span> Hantz Peter B Thermoris — Built with HTML, CSS & JavaScript</small>
+    </div>
+  </footer>
+
+  <script>
+    // Small helper: reveal on scroll
+    (function(){
+      const r = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('is-visible'); });
+      },{threshold:0.08});
+      r.forEach(el=>io.observe(el));
+    })();
+
+    // Update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Contact form handler (lightweight): attempts to open mailto as fallback
+    function handleContact(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const status = document.getElementById('formStatus');
+
+      // Simple front-end validation already handled by `required` attributes
+      // By default we'll open the user's email client via mailto. If you prefer, connect to Formspree or Netlify Forms.
+      const subject = encodeURIComponent('Portfolio inquiry from ' + name);
+      const body = encodeURIComponent(message + '\n\n— ' + name + ' ('+email+')');
+
+      // Try to open mail client
+      window.location.href = `mailto:you@example.com?subject=${subject}&body=${body}`;
+      status.textContent = 'Opening your email client...';
+
+      // Reset after a short delay
+      setTimeout(()=>{
+        status.textContent = 'Message composed in mail client — send to complete.';
+        e.target.reset();
+      },900);
+    }
+
+    // Small keyboard accessibility enhancement for project cards
+    document.addEventListener('keydown', (ev)=>{
+      if(ev.key === 'Escape') window.scrollTo({top:0,behavior:'smooth'});
+    });
+
+  </script>
+</body>
+</html>
