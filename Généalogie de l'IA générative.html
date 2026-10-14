@@ -1,0 +1,277 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Généalogie de l'IA générative</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,650&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: mindmap bilatérale (anciens à gauche, récents à droite) + fiche du papier + index chronologique */
+:root{
+  --bg:#f2f4f6; --surface:#ffffff; --ink:#15212c; --muted:#5a6773; --line:#c9d1d8;
+  --e1:#7a5c2e; --e2:#b23a48; --e3:#2f6f9f; --e4:#5b4bb0; --e5:#1f7a5a; --e6:#c2620f;
+  --star:#c2620f;
+  --f-display:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10161c; --surface:#18212a; --ink:#e6ebef; --muted:#97a3ae; --line:#34414d;
+  --e1:#d3a866; --e2:#ef7d8a; --e3:#6fb2e6; --e4:#a99af0; --e5:#5fcf9f; --e6:#f2a04e; --star:#f2a04e;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10161c; --surface:#18212a; --ink:#e6ebef; --muted:#97a3ae; --line:#34414d;
+  --e1:#d3a866; --e2:#ef7d8a; --e3:#6fb2e6; --e4:#a99af0; --e5:#5fcf9f; --e6:#f2a04e; --star:#f2a04e;
+  color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1240px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:8px;max-width:70ch}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:650;font-size:clamp(28px,4vw,42px);line-height:1.1;margin:0;text-wrap:balance}
+h2{font-family:var(--f-display);font-weight:650;font-size:24px;margin:0;text-wrap:balance}
+.lede{color:var(--muted);margin:0}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.seg button{font:500 13px var(--f-body);color:var(--muted);background:none;border:0;padding:7px 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.seg button:focus-visible{outline:2px solid var(--e3);outline-offset:-2px}
+.hint{font-size:13px;color:var(--muted)}
+.mapbox{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow-x:auto}
+svg{display:block}
+.link{fill:none;stroke-width:1.4;opacity:.55}
+.leaf{cursor:pointer}
+.leaf text{font-family:var(--f-body);font-size:12.5px;fill:var(--ink)}
+.leaf .yr{font-family:var(--f-mono);font-size:11px;fill:var(--muted)}
+.leaf .hit{fill:transparent}
+.leaf:hover .hit,.leaf:focus-visible .hit{fill:var(--bg)}
+.leaf:focus{outline:none}
+.leaf.sel .hit{fill:var(--bg);stroke:var(--ink);stroke-width:1}
+.leaf.dim{opacity:.22}
+.era rect{stroke-width:1.5}
+.era text{font-family:var(--f-display);font-size:15px;font-weight:650}
+.era .span{font-family:var(--f-mono);font-size:10.5px;font-weight:400;fill:var(--muted)}
+.root rect{fill:var(--ink)}
+.root text{fill:var(--bg);font-family:var(--f-display);font-weight:650;font-size:17px}
+.root .sub{font-family:var(--f-mono);font-size:10.5px;font-weight:400;opacity:.75}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:baseline}
+.card .cy{font-family:var(--f-mono);font-size:13px;color:var(--muted);grid-row:span 3}
+.card h3{font-family:var(--f-display);font-size:22px;font-weight:650;margin:0;text-wrap:balance}
+.card .au{color:var(--muted);font-size:14px}
+.card p{margin:0;max-width:72ch}
+.card a{color:var(--e3);font-family:var(--f-mono);font-size:13px;word-break:break-all}
+.card .meta{grid-column:2;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.pill{font:500 11px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid currentColor}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:28px}
+.era-list{display:flex;flex-direction:column;gap:8px;min-width:0}
+.era-list h3{font-family:var(--f-display);font-size:18px;margin:0;display:flex;gap:10px;align-items:baseline}
+.era-list h3 .n{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.era-list ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.era-list li{display:grid;grid-template-columns:44px 1fr;gap:8px;font-size:14px;min-width:0}
+.era-list li .y{font-family:var(--f-mono);font-size:12px;color:var(--muted);padding-top:2px;font-variant-numeric:tabular-nums}
+.era-list li a{color:var(--ink);text-decoration-color:var(--line);text-underline-offset:3px}
+.era-list li a:hover{text-decoration-color:currentColor}
+.star{color:var(--star)}
+.horizons{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.hz{border-top:2px solid var(--e6);padding-top:10px;display:flex;flex-direction:column;gap:4px}
+.hz b{font-family:var(--f-display);font-size:17px}
+.hz span{color:var(--muted);font-size:14px}
+footer{font-size:13px;color:var(--muted);max-width:80ch}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">De word2vec à 2026 · 55 papiers</div>
+    <h1>Généalogie de l'IA générative</h1>
+    <p class="lede">Les papiers qui ont construit les Transformers et l'IA générative, ère par ère. Les plus anciens à gauche, les plus récents à droite. Cliquez sur un papier pour sa fiche ; <span class="star">★</span> signale ceux qui ouvrent une piste d'avenir.</p>
+  </header>
+
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Filtre">
+      <button id="f-all" aria-pressed="true">Tout</button>
+      <button id="f-fut" aria-pressed="false">★ Perspectives d'avenir</button>
+    </div>
+    <span class="hint">Faites défiler horizontalement sur mobile.</span>
+  </div>
+
+  <div class="mapbox"><svg id="map" role="img" aria-label="Mindmap chronologique des papiers fondateurs de l'IA générative"></svg></div>
+
+  <section class="card" id="card" aria-live="polite"></section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2>Pistes d'avenir (2025–2026)</h2>
+    <div class="horizons">
+      <div class="hz"><b>Attention efficace et hybride</b><span>Compression et parcimonie de l'attention pour le million de tokens (DeepSeek-V4), hybrides avec SSM (Mamba).</span></div>
+      <div class="hz"><b>Mémoire et apprentissage continu</b><span>Des modèles qui apprennent après l'entraînement : Titans, Nested Learning / Hope.</span></div>
+      <div class="hz"><b>Au-delà de l'autorégressif</b><span>Génération de texte par diffusion (LLaDA) au lieu du token par token.</span></div>
+      <div class="hz"><b>World models</b><span>Prédire dans un espace latent plutôt que générer des pixels : JEPA, LeWorldModel.</span></div>
+      <div class="hz"><b>Raisonnement par RL et agents</b><span>RL sur tâches vérifiables (R1), planification longue, science automatisée (AI Scientist, Co-Mathematician).</span></div>
+      <div class="hz"><b>Comprendre et sécuriser</b><span>Interprétabilité mécaniste (graphes d'attribution) et priorités de sécurité partagées (Consensus de Singapour).</span></div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:18px">
+    <h2>Index chronologique et sources</h2>
+    <div class="cols" id="index"></div>
+  </section>
+
+  <footer>Sélection éditoriale : elle privilégie l'architecture Transformer, l'entraînement à grande échelle, l'alignement et le raisonnement. Liens vers arXiv ou la publication d'origine. Les entrées 2025–2026 ont été vérifiées par recherche web en octobre 2026.</footer>
+</div>
+
+<script>
+const AX = id => "https://arxiv.org/abs/" + id;
+const ERAS = [
+ {n:"Fondations", span:"2013–2016", c:"--e1", side:"L", items:[
+  ["2013","Word2Vec","Efficient Estimation of Word Representations in Vector Space","Mikolov et al. · Google","Les mots deviennent des vecteurs denses appris : la base de tous les embeddings.",AX("1301.3781")],
+  ["2013","VAE","Auto-Encoding Variational Bayes","Kingma & Welling","Premier modèle génératif à variables latentes entraînable par gradient, grâce à l'astuce de reparamétrisation.",AX("1312.6114")],
+  ["2014","GAN","Generative Adversarial Networks","Goodfellow et al.","Un générateur affronte un discriminateur. Lance la génération d'images réalistes.",AX("1406.2661")],
+  ["2014","Seq2Seq","Sequence to Sequence Learning with Neural Networks","Sutskever, Vinyals & Le · Google","Encodeur-décodeur LSTM pour la traduction : le cadre séquence-à-séquence.",AX("1409.3215")],
+  ["2014","Attention (Bahdanau)","Neural Machine Translation by Jointly Learning to Align and Translate","Bahdanau, Cho & Bengio","Le décodeur apprend où regarder dans la phrase source. Naissance du mécanisme d'attention.",AX("1409.0473")],
+  ["2015","Diffusion (origine)","Deep Unsupervised Learning using Nonequilibrium Thermodynamics","Sohl-Dickstein et al.","Idée fondatrice des modèles de diffusion : apprendre à inverser un bruitage progressif.",AX("1503.03585")],
+  ["2015","ResNet","Deep Residual Learning for Image Recognition","He et al. · Microsoft","Les connexions résiduelles permettent d'empiler des centaines de couches. Chaque bloc Transformer en dépend.",AX("1512.03385")]
+ ]},
+ {n:"Le Transformer", span:"2017–2019", c:"--e2", side:"L", items:[
+  ["2017","Mixture of Experts","Outrageously Large Neural Networks: The Sparsely-Gated MoE Layer","Shazeer et al. · Google","N'activer que quelques « experts » par token. Ancêtre des MoE de DeepSeek, Mixtral, etc.",AX("1701.06538")],
+  ["2017","Attention Is All You Need","Attention Is All You Need","Vaswani et al. · Google","Abandon de la récurrence au profit de la self-attention multi-têtes. L'architecture de tous les LLM actuels.",AX("1706.03762")],
+  ["2017","RL from Human Preferences","Deep Reinforcement Learning from Human Preferences","Christiano et al. · OpenAI / DeepMind","Apprendre une récompense à partir de comparaisons humaines : l'origine du RLHF.",AX("1706.03741")],
+  ["2018","GPT-1","Improving Language Understanding by Generative Pre-Training","Radford et al. · OpenAI","Pré-entraînement génératif d'un décodeur Transformer, puis fine-tuning par tâche.","https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf"],
+  ["2018","BERT","BERT: Pre-training of Deep Bidirectional Transformers","Devlin et al. · Google","Encodeur bidirectionnel pré-entraîné par masquage. Domine le NLP de compréhension pendant trois ans.",AX("1810.04805")],
+  ["2019","GPT-2","Language Models are Unsupervised Multitask Learners","Radford et al. · OpenAI","1,5 milliard de paramètres : des tâches réalisées sans fine-tuning (zero-shot).","https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf"],
+  ["2019","T5","Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer","Raffel et al. · Google","Tout problème de NLP en texte-vers-texte, avec une étude systématique des choix de pré-entraînement.",AX("1910.10683")]
+ ]},
+ {n:"Passage à l'échelle", span:"2020–2022", c:"--e3", side:"L", items:[
+  ["2020","Scaling Laws","Scaling Laws for Neural Language Models","Kaplan et al. · OpenAI","La perte décroît en loi de puissance avec les paramètres, les données et le calcul.",AX("2001.08361")],
+  ["2020","GPT-3","Language Models are Few-Shot Learners","Brown et al. · OpenAI","175 milliards de paramètres. L'apprentissage en contexte (few-shot) sans modifier les poids.",AX("2005.14165")],
+  ["2020","RAG","Retrieval-Augmented Generation for Knowledge-Intensive NLP","Lewis et al. · Meta","Coupler un générateur à une recherche documentaire pour ancrer les réponses.",AX("2005.11401")],
+  ["2020","DDPM","Denoising Diffusion Probabilistic Models","Ho, Jain & Abbeel","Rend la diffusion pratique et compétitive pour l'image.",AX("2006.11239")],
+  ["2020","ViT","An Image is Worth 16x16 Words","Dosovitskiy et al. · Google","Une image découpée en patchs devient une séquence de tokens pour un Transformer.",AX("2010.11929")],
+  ["2021","Switch Transformer","Switch Transformers: Scaling to Trillion Parameter Models","Fedus, Zoph & Shazeer · Google","MoE simplifié (un expert par token) jusqu'au trillion de paramètres.",AX("2101.03961")],
+  ["2021","CLIP","Learning Transferable Visual Models From Natural Language Supervision","Radford et al. · OpenAI","Aligne images et textes par apprentissage contrastif. Brique clé du texte-vers-image.",AX("2103.00020")],
+  ["2021","RoPE","RoFormer: Enhanced Transformer with Rotary Position Embedding","Su et al.","Encodage de position par rotation des requêtes et clés. Standard des LLM actuels.",AX("2104.09864")],
+  ["2021","LoRA","LoRA: Low-Rank Adaptation of Large Language Models","Hu et al. · Microsoft","Fine-tuning par matrices de rang faible : adapter un LLM pour une fraction du coût.",AX("2106.09685")],
+  ["2021","Latent Diffusion","High-Resolution Image Synthesis with Latent Diffusion Models","Rombach et al.","Diffusion dans un espace latent compressé. La base de Stable Diffusion.",AX("2112.10752")],
+  ["2022","Chain-of-Thought","Chain-of-Thought Prompting Elicits Reasoning in LLMs","Wei et al. · Google","Faire écrire les étapes intermédiaires améliore nettement le raisonnement.",AX("2201.11903")],
+  ["2022","InstructGPT","Training Language Models to Follow Instructions with Human Feedback","Ouyang et al. · OpenAI","SFT puis RLHF : la recette qui mène directement à ChatGPT.",AX("2203.02155")],
+  ["2022","Chinchilla","Training Compute-Optimal Large Language Models","Hoffmann et al. · DeepMind","À budget fixe, mieux vaut entraîner sur beaucoup plus de tokens (environ 20 par paramètre).",AX("2203.15556")],
+  ["2022","FlashAttention","FlashAttention: Fast and Memory-Efficient Exact Attention","Dao et al.","Attention exacte organisée pour la mémoire GPU : contextes plus longs, entraînement plus rapide.",AX("2205.14135")],
+  ["2022","ReAct","ReAct: Synergizing Reasoning and Acting in Language Models","Yao et al.","Alterner raisonnement et actions (outils) : le schéma de base des agents.",AX("2210.03629")],
+  ["2022","Constitutional AI","Constitutional AI: Harmlessness from AI Feedback","Bai et al. · Anthropic","Aligner par des principes écrits et un feedback produit par l'IA (RLAIF).",AX("2212.08073")],
+  ["2022","DiT","Scalable Diffusion Models with Transformers","Peebles & Xie","Le Transformer remplace le U-Net comme débruiteur. Architecture des générateurs vidéo.",AX("2212.09748")]
+ ]},
+ {n:"Ère ChatGPT", span:"2023–2024", c:"--e4", side:"R", items:[
+  ["2023","LLaMA","LLaMA: Open and Efficient Foundation Language Models","Touvron et al. · Meta","Modèles ouverts compétitifs sur données publiques : lance l'écosystème open-weight.",AX("2302.13971")],
+  ["2023","Toolformer","Toolformer: Language Models Can Teach Themselves to Use Tools","Schick et al. · Meta","Le modèle apprend seul quand et comment appeler des API.",AX("2302.04761")],
+  ["2023","GPT-4","GPT-4 Technical Report","OpenAI","Multimodal, niveau humain sur de nombreux examens, performance prédite avant l'entraînement.",AX("2303.08774")],
+  ["2023","DPO","Direct Preference Optimization","Rafailov et al. · Stanford","Aligner sur des préférences sans modèle de récompense ni boucle de RL.",AX("2305.18290")],
+  ["2023","Let's Verify Step by Step","Let's Verify Step by Step","Lightman et al. · OpenAI","Récompenser chaque étape du raisonnement (process reward) plutôt que le seul résultat.",AX("2305.20050")],
+  ["2023","Monosemanticity","Towards Monosemanticity: Decomposing Language Models With Dictionary Learning","Bricken et al. · Anthropic","Des autoencodeurs parcimonieux extraient des concepts lisibles des activations.","https://transformer-circuits.pub/2023/monosemantic-features/index.html"],
+  ["2023","Mamba","Mamba: Linear-Time Sequence Modeling with Selective State Spaces","Gu & Dao","Modèle à espace d'états sélectif, coût linéaire. Aujourd'hui intégré dans des architectures hybrides.",AX("2312.00752"),1],
+  ["2024","Mixtral","Mixtral of Experts","Jiang et al. · Mistral AI","MoE ouvert 8×7B qui popularise les experts creux en open-weight.",AX("2401.04088")],
+  ["2024","DeepSeekMath / GRPO","DeepSeekMath: Pushing the Limits of Mathematical Reasoning","Shao et al. · DeepSeek","Introduit GRPO, un RL sans critique devenu la base du RL de raisonnement.",AX("2402.03300")],
+  ["2024","Test-time compute","Scaling LLM Test-Time Compute Optimally","Snell et al. · Google DeepMind","Plus de calcul à l'inférence peut valoir mieux qu'un modèle plus gros. Fondement des modèles « qui réfléchissent ».",AX("2408.03314"),1],
+  ["2024","The AI Scientist (v1)","The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery","Lu et al. · Sakana AI","Premier pipeline automatisé idée → expériences → article → relecture.",AX("2408.06292")],
+  ["2024","DeepSeek-V3","DeepSeek-V3 Technical Report","DeepSeek-AI","MoE de 671 Md, attention latente (MLA), prédiction multi-token, FP8. Coût d'entraînement très bas.",AX("2412.19437")]
+ ]},
+ {n:"Raisonnement", span:"2025", c:"--e5", side:"R", items:[
+  ["2025","Titans","Titans: Learning to Memorize at Test Time","Behrouz et al. · Google","Une mémoire neuronale à long terme qui apprend pendant l'inférence (déposé fin décembre 2024).",AX("2501.00663"),1],
+  ["2025","DeepSeek-R1","DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via RL","DeepSeek-AI · Nature 645 (2025)","Le raisonnement émerge par RL pur sur tâches vérifiables, sans traces humaines ; publié dans Nature en septembre 2025.",AX("2501.12948")],
+  ["2025","LLaDA","Large Language Diffusion Models","Nie et al. · NeurIPS 2025","LLM par diffusion masquée à 8 Md de paramètres, compétitif avec LLaMA3 8B. Remet en cause l'autorégressif.",AX("2502.09992"),1],
+  ["2025","Transformers w/o Norm","Transformers without Normalization","Zhu, Chen, He, LeCun & Liu · FAIR","La normalisation n'est pas indispensable : une simple tanh dynamique (DyT) la remplace.",AX("2503.10622")],
+  ["2025","Biology of an LLM","On the Biology of a Large Language Model","Lindsey et al. · Anthropic","Graphes d'attribution qui tracent les circuits internes de Claude 3.5 Haiku (raisonnement en deux sauts, planification).","https://transformer-circuits.pub/2025/attribution-graphs/biology.html",1],
+  ["2025","Does RL Incentivize Reasoning?","Does Reinforcement Learning Really Incentivize Reasoning Capacity in LLMs Beyond the Base Model?","Yue et al.","Contrepoint : le RL affûte surtout des capacités déjà présentes dans le modèle de base.",AX("2504.13837")],
+  ["2025","Nested Learning / Hope","Nested Learning: The Illusion of Deep Learning Architectures","Behrouz & Mirrokni · Google · NeurIPS 2025","Un modèle vu comme des optimisations imbriquées ; l'architecture Hope s'auto-modifie pour apprendre en continu.","https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning/",1]
+ ]},
+ {n:"2026 et horizons", span:"2026 →", c:"--e6", side:"R", items:[
+  ["2026","LeWorldModel","LeWorldModel: Stable End-to-End JEPA from Pixels","Maes, Le Lidec, Scieur, LeCun & Balestriero","Premier JEPA entraîné de bout en bout depuis les pixels avec deux termes de perte ; planification 48× plus rapide.",AX("2603.19312"),1],
+  ["2026","The AI Scientist (Nature)","Towards end-to-end automation of AI research","Lu et al. · Sakana AI, UBC, Vector, Oxford · Nature, mars 2026","Le pipeline de recherche automatisée, de l'idée à la relecture, publié dans Nature.","https://sakana.ai/ai-scientist-nature/",1],
+  ["2026","DeepSeek-V4","DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence","DeepSeek-AI · avril 2026","Attention hybride compressée (CSA + HCA), hyper-connexions mHC, optimiseur Muon : contexte d'un million de tokens à coût réduit.",AX("2606.19348"),1],
+  ["2026","AI Co-Mathematician","AI Co-Mathematician: Accelerating Mathematicians with Agentic AI","Google DeepMind","Un établi agentique pour la recherche mathématique : agents parallèles, littérature, preuve formelle.","https://www.analyticsvidhya.com/blog/2026/05/top-llm-research-papers-2026/",1],
+  ["2026","Singapore Consensus 2026","The 2026 Singapore Consensus on Global AI Safety Research Priorities","Collectif international · juillet 2026","Feuille de route partagée des priorités de recherche en sécurité de l'IA.",AX("2608.14611"),1]
+ ]}
+];
+
+const W = 1220, ROW = 24, GAP = 22, cx = W/2, ERA_X = 190, LEAF_X = 320, ERA_W = 156, ERA_H = 46;
+const svg = document.getElementById("map"), NS = "http://www.w3.org/2000/svg";
+const el = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); (p||svg).appendChild(e); return e; };
+let all = [], sel = null, filt = "all";
+ERAS.forEach((e, ei) => e.items.forEach((it, ii) => all.push({e, ei, ii, y:it[0], s:it[1], t:it[2], a:it[3], w:it[4], u:it[5], f:!!it[6]})));
+
+function sideH(side){ const es = ERAS.filter(e=>e.side===side); return es.reduce((h,e)=>h+e.items.length*ROW,0) + (es.length-1)*GAP; }
+const H = Math.max(sideH("L"), sideH("R")) + 60;
+svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("width", W); svg.setAttribute("height", H);
+const gLinks = el("g", {}), gNodes = el("g", {});
+const cy = H/2;
+
+["L","R"].forEach(side => {
+  const dir = side==="L" ? -1 : 1;
+  let yc = (H - sideH(side))/2 + ROW/2;
+  ERAS.forEach((e, ei) => {
+    if (e.side !== side) return;
+    const col = `var(${e.c})`;
+    const ys = e.items.map((_, i) => yc + i*ROW);
+    const ey = (ys[0] + ys[ys.length-1]) / 2;
+    const ex = cx + dir*ERA_X;
+    // root -> era
+    const rx = cx + dir*80;
+    el("path", {class:"link", stroke:col, d:`M${rx},${cy} C${rx+dir*50},${cy} ${ex-dir*(ERA_W/2+50)},${ey} ${ex-dir*ERA_W/2},${ey}`, "stroke-width":2.2}, gLinks);
+    // era node
+    const g = el("g", {class:"era"}, gNodes);
+    el("rect", {x:ex-ERA_W/2, y:ey-ERA_H/2, width:ERA_W, height:ERA_H, rx:10, fill:"var(--surface)", stroke:col}, g);
+    const tt = el("text", {x:ex, y:ey-3, "text-anchor":"middle", fill:col}, g); tt.textContent = `${ei+1}. ${e.n}`;
+    const ts = el("text", {x:ex, y:ey+14, "text-anchor":"middle", class:"span"}, g); ts.textContent = e.span;
+    // leaves
+    e.items.forEach((it, ii) => {
+      const p = all.find(q => q.ei===ei && q.ii===ii), y = ys[ii];
+      const lx = cx + dir*LEAF_X, sx = ex + dir*ERA_W/2;
+      el("path", {class:"link", stroke:col, d:`M${sx},${ey} C${sx+dir*40},${ey} ${lx-dir*40},${y} ${lx},${y}`}, gLinks);
+      const lg = el("g", {class:"leaf", tabindex:0, role:"button", "aria-label":`${p.y} ${p.s}`}, gNodes);
+      const label = `${p.s}${p.f?"  ★":""}`;
+      const tw = label.length*6.7 + 46;
+      el("rect", {class:"hit", x: side==="L" ? lx-tw-6 : lx-4, y:y-10, width:tw+10, height:20, rx:5}, lg);
+      el("circle", {cx:lx, cy:y, r:3.6, fill:col}, lg);
+      const tx = el("text", {x: lx + dir*10, y:y+4, "text-anchor": side==="L"?"end":"start"}, lg);
+      const yr = el("tspan", {class:"yr"}, tx); yr.textContent = p.y + "  ";
+      const nm = el("tspan", {}, tx); nm.textContent = p.s;
+      if (p.f){ const st = el("tspan", {fill:"var(--star)"}, tx); st.textContent = "  ★"; }
+      p.node = lg;
+      lg.addEventListener("click", () => select(p));
+      lg.addEventListener("keydown", ev => { if (ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); select(p); }});
+    });
+    yc += e.items.length*ROW + GAP;
+  });
+});
+// root
+const rg = el("g", {class:"root"}, gNodes);
+el("rect", {x:cx-80, y:cy-30, width:160, height:60, rx:30}, rg);
+const r1 = el("text", {x:cx, y:cy-2, "text-anchor":"middle"}, rg); r1.textContent = "IA générative";
+const r2 = el("text", {x:cx, y:cy+16, "text-anchor":"middle", class:"sub"}, rg); r2.textContent = "← avant · après →";
+
+const card = document.getElementById("card");
+function select(p){
+  if (sel) sel.node.classList.remove("sel");
+  sel = p; p.node.classList.add("sel");
+  const col = `var(${p.e.c})`;
+  card.innerHTML = `<div class="cy">${p.y}</div>
+    <h3>${p.t}</h3>
+    <div class="au">${p.a}</div>
+    <p>${p.w}</p>
+    <div class="meta"><span class="pill" style="color:${col}">${p.ei+1}. ${p.e.n}</span>${p.f?'<span class="pill star">★ perspective</span>':''}<a href="${p.u}" target="_blank" rel="noopener">${p.u.replace(/^https?:\/\//,"")}</a></div>`;
+}
+select(all.find(p => p.s==="Attention Is All You Need"));
+
+function applyFilter(){
+  all.forEach(p => p.node.classList.toggle("dim", filt==="fut" && !p.f));
+  document.getElementById("f-all").setAttribute("aria-pressed", filt==="all");
+  document.getElementById("f-fut").setAttribute("aria-pressed", filt==="fut");
+}
+document.getElementById("f-all").onclick = () => { filt="all"; applyFilter(); };
+document.getElementById("f-fut").onclick = () => { filt="fut"; applyFilter(); };
+
+// index
+const idx = document.getElementById("index");
+ERAS.forEach((e, ei) => {
+  const d = document.createElement("div"); d.className = "era-list";
+  d.innerHTML = `<h3 style="color:var(${e.c})">${ei+1}. ${e.n} <span class="n">${e.span}</span></h3><ol>` +
+    e.items.map(it => `<li><span class="y">${it[0]}</span><span><a href="${it[5]}" target="_blank" rel="noopener">${it[2]}</a>${it[6]?' <span class="star">★</span>':''} <span style="color:var(--muted)">— ${it[3]}</span></span></li>`).join("") + `</ol>`;
+  idx.appendChild(d);
+});
+</script>
+
+</body></html>
