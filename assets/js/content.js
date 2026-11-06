@@ -230,19 +230,6 @@ window.PROJECTS = [
     links: []
   },
   {
-    id: "genai-genealogy",
-    track: "ai",
-    kind: "personal",
-    year: "",
-    title: { en: "Generative AI genealogy", fr: "Généalogie de l'IA générative" },
-    summary: {
-      en: "An interactive map of the research papers behind today's generative AI, with a note card for each paper and a chronological index.",
-      fr: "Une carte interactive des articles de recherche à l'origine de l'IA générative, avec une fiche par article et un index chronologique."
-    },
-    tags: ["Generative AI", "JavaScript"],
-    links: [{ label: { en: "Open the map", fr: "Ouvrir la carte" }, href: "projects/genealogie-ia-generative.html" }]
-  },
-  {
     id: "nba",
     track: "data",
     kind: "personal",
@@ -316,6 +303,24 @@ window.TIMELINE = [
     what: { en: "Master's in Electronic Engineering (Computing & Telecoms)", fr: "Master Génie Électronique (Informatique & Télécoms)" },
     where: { en: "State University of Haiti", fr: "Université d'État d'Haïti" },
     edu: true
+  }
+];
+
+/*
+  Writing hosted on this site. Always shown in the Writing section, next to the DEV articles.
+  lang is the language the piece is written in.
+*/
+window.WRITING_PINNED = [
+  {
+    title: "Généalogie de l'IA générative",
+    url: "projects/genealogie-ia-generative.html",
+    date: "2026-10-14",
+    lang: "fr",
+    tags: ["ai", "research", "interactive"],
+    summary: {
+      en: "An interactive map of the research papers behind today's generative AI, with a note card for each paper and a chronological index.",
+      fr: "Une carte interactive des articles de recherche à l'origine de l'IA générative actuelle, avec une fiche par article et un index chronologique."
+    }
   }
 ];
 

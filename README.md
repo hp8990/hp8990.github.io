@@ -67,7 +67,7 @@ This repository is the source of the portfolio site, served by GitHub Pages at h
 | What I bring | Four strengths and three measured results, each linked to its project |
 | What I do | Two tracks: systems, cloud & DevOps, and data science & AI, each with its main tools |
 | Selected work | Client projects and personal projects, filterable by IT & infrastructure, data science, or AI & LLMs |
-| Writing | Latest articles from [DEV](https://dev.to/hantz_peterthermoris_f64), loaded live |
+| Writing | The generative AI genealogy map, plus the latest articles from [DEV](https://dev.to/hantz_peterthermoris_f64), loaded live |
 | Latest on GitHub | Only the repositories you choose, loaded live. Hidden for now. |
 | Path | Career and education timeline, certifications and languages |
 | Contact | LinkedIn and DEV (GitHub and Kaggle can be switched on) |
@@ -84,7 +84,7 @@ Light and dark themes follow the visitor's system setting and can be switched ma
 | `assets/js/main.js` | Page behaviour: language and theme switch, project filters, GitHub and DEV loading, agent harness demo |
 | `assets/css/site.css` | All styles, including the dark theme |
 | `assets/img/` | Portrait and project images |
-| `projects/` | Material linked from project entries: the generative AI genealogy map, the NBA analysis notebook, and datasets in `projects/data/` |
+| `projects/` | Material linked from the site: the generative AI genealogy map (shown under Writing), the NBA analysis notebook, and datasets in `projects/data/` |
 | `docs/` | The public CV in English and French (PDF) |
 | `archive/` | Earlier drafts of the site, kept for reference and not linked from the homepage |
 | `ms70602493.txt` | Microsoft 365 domain verification file. It must stay at the root. |
@@ -97,6 +97,7 @@ Almost every change happens in `assets/js/content.js`. Each text field has an `e
 - **What I bring:** edit `VALUE` in `content.js`. `points` are the strengths; `results` are the figures, each with a short label, a context line and the `id` of the project it links to.
 - **Add a project:** copy an entry in `PROJECTS`. Set `track` to `it`, `data` or `ai` (this drives the filters) and `kind` to `client` or `personal`. An `image` is optional; if you add one, give it an `imageAlt` description in both languages.
 - **Add a career step:** add an entry to `TIMELINE`, newest first. Mark education entries with `edu: true`.
+- **Writing on this site:** pieces hosted here, like the genealogy map, go in `WRITING_PINNED` in `content.js` and always show in the Writing section.
 - **Articles:** new DEV posts appear on their own. `ARTICLES` is only the backup list shown when DEV can't be reached.
 - **Update the CV:** the site offers the CV in the page language: `docs/Hantz-Peter-Thermoris-CV-EN.pdf` on the English page and `docs/Hantz-Peter-Thermoris-CV-FR.pdf` on the French page. Replace a file under the same name and update its `cvSize`. Leave `cv` empty to hide the CV buttons.
 - **Show an email address:** set `email`. It stays hidden while empty.

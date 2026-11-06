@@ -5,6 +5,7 @@
   var PROJECTS = window.PROJECTS || [];
   var TIMELINE = window.TIMELINE || [];
   var ARTICLES = window.ARTICLES || [];
+  var PINNED = window.WRITING_PINNED || [];
   var VALUE = window.VALUE || { points: [], results: [] };
   var I18N = window.I18N || {};
   var root = document.documentElement;
@@ -327,22 +328,37 @@
     ol.textContent = "";
     var fmt;
     try { fmt = new Intl.DateTimeFormat(lang === "fr" ? "fr-FR" : "en-GB", { day: "numeric", month: "long", year: "numeric" }); } catch (e) {}
-    articles.forEach(function (a) {
+    var all = articles.concat(PINNED).slice().sort(function (x, y) {
+      return String(y.date).slice(0, 10) < String(x.date).slice(0, 10) ? -1 : 1;
+    });
+    all.forEach(function (a) {
+      var itemLang = a.lang || "en";            // DEV articles are written in English
       var li = el("li", "article");
-      li.setAttribute("lang", "en");          // articles are written in English
+      li.setAttribute("lang", itemLang);
       var meta = el("div", "article-meta");
       var d = new Date(a.date + (a.date.length === 10 ? "T12:00:00" : ""));
       var time = el("time", null, fmt ? fmt.format(d) : a.date.slice(0, 10));
       time.setAttribute("datetime", a.date.slice(0, 10));
       time.setAttribute("lang", lang);
       meta.appendChild(time);
-      if (lang === "fr") { var en = el("span", "article-lang", t("writing.inEnglish")); en.setAttribute("lang", "fr"); meta.appendChild(en); }
+      if (itemLang !== lang) {
+        var note = el("span", "article-lang", t(itemLang === "fr" ? "writing.inFrench" : "writing.inEnglish"));
+        note.setAttribute("lang", lang); meta.appendChild(note);
+      }
+      if (!/^https?:/.test(a.url)) {
+        var kind = el("span", "article-lang", t("writing.onSite")); kind.setAttribute("lang", lang); meta.appendChild(kind);
+      }
       li.appendChild(meta);
       var body = el("div", "article-body");
       var h = el("h3");
-      var link = el("a", null, a.title); link.href = a.url; link.target = "_blank"; link.rel = "noopener";
+      var link = el("a", null, a.title); link.href = a.url;
+      if (/^https?:/.test(a.url)) { link.target = "_blank"; link.rel = "noopener"; }
       h.appendChild(link); body.appendChild(h);
-      if (a.summary) body.appendChild(el("p", null, a.summary));
+      if (a.summary) {
+        var sum = el("p", null, pick(a.summary));
+        if (typeof a.summary !== "string") sum.setAttribute("lang", lang);   // our own summary follows the page language
+        body.appendChild(sum);
+      }
       if (a.tags && a.tags.length) {
         var tags = el("ul", "project-tags");
         a.tags.slice(0, 4).forEach(function (tg) { tags.appendChild(el("li", null, "#" + tg)); });
