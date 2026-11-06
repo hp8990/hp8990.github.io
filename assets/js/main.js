@@ -66,7 +66,7 @@
     renderTimeline();
     renderRepos();
     renderArticles();
-    drawDemo();
+    renderHarness();
     markNewTabs(document);
   }
 
@@ -383,140 +383,119 @@
       .catch(function () { /* keep the built-in list */ });
   }
 
-  /* ---------------- Keystroke demo ---------------- */
-  var input = document.getElementById("demoInput");
-  var plot = document.getElementById("demoPlot");
-  var MAX = 18;
-  var strokes = [];        // { key, dwell, flight }
-  var down = {};           // code -> { t, idx }
-  var lastUp = null;
-  var lastInput = null;
-  var sawKeydown = false;
-  var freshIdx = -1;
-  var SVGNS = "http://www.w3.org/2000/svg";
+  /* ---------------- Agent harness demo ---------------- */
+  var HARNESS = window.HARNESS || [];
+  var hx = { idx: -1, pending: false, log: [], ran: 0, stopped: 0 };
+  var hxStep = document.getElementById("hxStep");
+  var hxLog = document.getElementById("hxLog");
+  var hxNext = document.getElementById("hxNext");
+  var hxApprove = document.getElementById("hxApprove");
+  var hxReject = document.getElementById("hxReject");
+  var hxRestart = document.getElementById("hxRestart");
+  var ICON = { allow: "✓", approval: "?", steer: "↻", block: "✕", approved: "✓", rejected: "✕" };
 
-  function svg(tag, attrs, text) {
-    var n = document.createElementNS(SVGNS, tag);
-    for (var k in attrs) n.setAttribute(k, attrs[k]);
-    if (text != null) n.textContent = text;
-    return n;
+  function clock() {
+    var d = new Date();
+    return [d.getHours(), d.getMinutes(), d.getSeconds()].map(function (n) { return (n < 10 ? "0" : "") + n; }).join(":");
   }
-  function label(k) {
-    if (k === " ") return "␣";
-    if (k.length === 1) return k;
-    return "";
-  }
-  function avg(arr) {
-    var v = arr.filter(function (x) { return x != null; });
-    return v.length ? Math.round(v.reduce(function (a, b) { return a + b; }, 0) / v.length) : null;
-  }
+  function toolName(call) { return String(call).split("(")[0]; }
 
-  function drawDemo() {
-    if (!plot) return;
-    var W = Math.max(260, Math.round(plot.clientWidth || 480));
-    var H = Math.max(140, Math.round(plot.clientHeight || 200));
-    plot.setAttribute("viewBox", "0 0 " + W + " " + H);
-    while (plot.firstChild) plot.removeChild(plot.firstChild);
+  // log entries keep keys, not text, so they re-render in the current language
+  function addLog(entry) { entry.time = clock(); hx.log.push(entry); }
 
-    var padL = 34, padR = 6, padT = 8, padB = 22;
-    var iw = W - padL - padR, ih = H - padT - padB;
-    var vals = [];
-    strokes.forEach(function (s) { if (s.dwell != null) vals.push(s.dwell); if (s.flight != null) vals.push(s.flight); });
-    var top = Math.max(300, Math.ceil((Math.max.apply(null, vals.concat([0])) * 1.1) / 100) * 100);
-    top = Math.min(top, 1200);
-    var y = function (v) { return padT + ih - (Math.min(v, top) / top) * ih; };
-    var step = top <= 400 ? 100 : top <= 800 ? 200 : 300;
-
-    for (var g = 0; g <= top; g += step) {
-      plot.appendChild(svg("line", { "class": "grid", x1: padL, x2: W - padR, y1: y(g), y2: y(g) }));
-      plot.appendChild(svg("text", { "class": "axis-label", x: padL - 6, y: y(g) + 3, "text-anchor": "end" }, g === 0 ? "0" : g + "ms"));
-    }
-
-    if (!strokes.length) {
-      plot.appendChild(svg("text", { "class": "empty", x: padL + iw / 2, y: padT + ih / 2, "text-anchor": "middle" }, t("demo.empty")));
+  function renderHarness() {
+    if (!hxStep || !hxLog) return;
+    hxStep.textContent = "";
+    var step = HARNESS[hx.idx];
+    if (hx.idx < 0) {
+      hxStep.appendChild(el("p", "hx-intro", t("harness.intro")));
     } else {
-      var slot = iw / MAX;
-      var bw = Math.max(4, Math.min(18, slot * 0.42));
-      var pts = [];
-      strokes.forEach(function (s, i) {
-        var cx = padL + slot * i + slot / 2;
-        if (s.dwell != null) {
-          var r = svg("rect", { "class": "bar-dwell" + (i === freshIdx ? " fresh" : ""), x: cx - bw / 2, y: y(s.dwell), width: bw, height: Math.max(1, padT + ih - y(s.dwell)), rx: 2 });
-          plot.appendChild(r);
-        }
-        if (s.flight != null) pts.push([cx, y(s.flight)]);
-        var lb = label(s.key);
-        if (lb) plot.appendChild(svg("text", { "class": "key-label", x: cx, y: H - 6, "text-anchor": "middle" }, lb));
-      });
-      if (pts.length > 1) {
-        plot.appendChild(svg("polyline", { "class": "line-flight", points: pts.map(function (p) { return p.join(","); }).join(" ") }));
+      hxStep.appendChild(el("p", "hx-count", t("harness.step").replace("{n}", hx.idx + 1).replace("{total}", HARNESS.length)));
+      var prop = el("p", "hx-proposal");
+      prop.appendChild(el("span", "hx-who", t("harness.proposes")));
+      prop.appendChild(el("span", "hx-action", pick(step.action)));
+      hxStep.appendChild(prop);
+      var code = el("code", "hx-tool", step.tool);
+      code.setAttribute("lang", "en");
+      hxStep.appendChild(code);
+      var outcome = step.outcome || step.verdict;
+      var v = el("div", "hx-verdict v-" + outcome);
+      var ic = el("span", "hx-icon", ICON[outcome]); ic.setAttribute("aria-hidden", "true");
+      v.appendChild(ic);
+      var vt = el("div", "hx-vtext");
+      var label = outcome === "approved" ? t("harness.approvedBy") : outcome === "rejected" ? t("harness.rejectedBy") : t("harness.v." + step.verdict);
+      vt.appendChild(el("strong", null, label));
+      vt.appendChild(el("span", null, " " + pick(step.reason)));
+      if (step.verdict === "steer") {
+        var rw = el("span", "hx-rewrite", t("harness.rewritten") + " ");
+        var c2 = el("code", null, step.steerTo); c2.setAttribute("lang", "en");
+        rw.appendChild(c2); vt.appendChild(rw);
       }
-      pts.forEach(function (p) { plot.appendChild(svg("circle", { "class": "dot-flight", cx: p[0], cy: p[1], r: 3.5 })); });
+      var res = outcome === "approved" ? step.approved : outcome === "rejected" ? step.rejected : step.result;
+      if (res && outcome !== "approval") vt.appendChild(el("span", "hx-result", pick(res)));
+      v.appendChild(vt);
+      hxStep.appendChild(v);
     }
-
-    var ad = avg(strokes.map(function (s) { return s.dwell; }));
-    var af = avg(strokes.map(function (s) { return s.flight; }));
-    document.getElementById("avgDwell").textContent = ad == null ? "–" : ad + " ms";
-    document.getElementById("avgFlight").textContent = af == null ? "–" : af + " ms";
-    var sum = document.getElementById("demoSummary");
-    if (sum) {
-      sum.textContent = !strokes.length ? t("demo.summaryEmpty") :
-        t("demo.summary").replace("{n}", strokes.length)
-          .replace("{d}", ad == null ? "–" : ad + " ms")
-          .replace("{f}", af == null ? "–" : af + " ms");
-    }
+    // controls
+    var finished = HARNESS.length > 0 && hx.idx >= HARNESS.length - 1 && !hx.pending;
+    if (finished) hxStep.appendChild(el("p", "hx-done", t("harness.done").replace("{ran}", hx.ran).replace("{stopped}", hx.stopped)));
+    hxNext.hidden = hx.pending || finished;
+    hxNext.textContent = hx.idx < 0 ? t("harness.start") : t("harness.next");
+    hxApprove.hidden = hxReject.hidden = !hx.pending;
+    // log
+    hxLog.textContent = "";
+    if (!hx.log.length) hxLog.appendChild(el("li", "hx-log-empty", t("harness.logEmpty")));
+    hx.log.forEach(function (e) {
+      var li = el("li", "hx-entry v-" + e.kind);
+      var tm = el("time", null, e.time); li.appendChild(tm);
+      var c = el("code", null, e.tool); c.setAttribute("lang", "en"); li.appendChild(c);
+      var txt = e.kind === "approved" ? t("harness.approvedBy") : e.kind === "rejected" ? t("harness.rejectedBy") : t("harness.v." + e.kind);
+      var out = el("span", "hx-outcome", txt + (e.res ? ". " + pick(e.res) : "."));
+      li.appendChild(out);
+      hxLog.appendChild(li);
+    });
+    return finished;
   }
 
-  function push(s) {
-    strokes.push(s);
-    if (strokes.length > MAX) {
-      strokes.shift();
-      for (var c in down) if (down[c].idx != null) down[c].idx--;
+  function hxAdvance() {
+    if (hx.pending) return;
+    hx.idx++;
+    var step = HARNESS[hx.idx];
+    if (!step) { hx.idx = HARNESS.length - 1; return; }
+    step.outcome = null;
+    if (step.verdict === "approval") {
+      hx.pending = true;
+      renderHarness();
+      hxApprove.focus();
+      return;
     }
-    freshIdx = strokes.length - 1;
+    if (step.verdict === "allow") hx.ran++;
+    else hx.stopped++;
+    if (step.verdict === "steer") hx.ran++;
+    addLog({ kind: step.verdict, tool: toolName(step.verdict === "steer" ? step.steerTo : step.tool), res: step.result || null });
+    var finished = renderHarness();
+    if (finished) hxRestart.focus();
   }
-
-  if (input && plot) {
-    input.addEventListener("keydown", function (e) {
-      if (e.repeat || e.isComposing || e.keyCode === 229 || !e.key) return;
-      if (e.key.length !== 1 && e.key !== "Backspace") return;
-      sawKeydown = true;
-      var now = performance.now();
-      var flight = lastUp != null ? Math.round(now - lastUp) : null;
-      if (flight != null && flight > 2000) flight = null;   // long pauses aren't rhythm
-      push({ key: e.key === "Backspace" ? "⌫" : e.key, dwell: null, flight: flight });
-      down[e.code || e.key] = { t: now, idx: strokes.length - 1 };
-      drawDemo();
-    });
-    input.addEventListener("keyup", function (e) {
-      var d = down[e.code || e.key];
-      if (!d) return;
-      var now = performance.now();
-      if (d.idx >= 0 && strokes[d.idx]) strokes[d.idx].dwell = Math.round(now - d.t);
-      delete down[e.code || e.key];
-      lastUp = now;
-      freshIdx = d.idx;
-      drawDemo();
-    });
-    // Touch keyboards: no reliable key up/down, so measure the gap between inputs only
-    input.addEventListener("input", function (e) {
-      if (sawKeydown) { sawKeydown = false; return; }
-      var now = performance.now();
-      var ch = (e.data || "").slice(-1);
-      var flight = lastInput != null ? Math.round(now - lastInput) : null;
-      if (flight != null && flight > 2000) flight = null;
-      lastInput = now;
-      if (!ch) return;
-      push({ key: ch, dwell: null, flight: flight });
-      var tn = document.getElementById("touchNote"); if (tn) tn.hidden = false;
-      drawDemo();
-    });
-    document.getElementById("demoReset").addEventListener("click", function () {
-      strokes = []; down = {}; lastUp = null; lastInput = null; freshIdx = -1;
-      input.value = ""; input.focus(); drawDemo();
-    });
-    var rt;
-    window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(drawDemo, 120); });
+  function hxDecide(ok) {
+    var step = HARNESS[hx.idx];
+    hx.pending = false;
+    step.outcome = ok ? "approved" : "rejected";
+    if (ok) hx.ran++; else hx.stopped++;
+    addLog({ kind: step.outcome, tool: toolName(step.tool), res: ok ? step.approved : step.rejected });
+    var finished = renderHarness();
+    (finished ? hxRestart : hxNext).focus();
+  }
+  function hxReset() {
+    HARNESS.forEach(function (s) { s.outcome = null; });
+    hx = { idx: -1, pending: false, log: [], ran: 0, stopped: 0 };
+    renderHarness();
+    hxNext.focus();
+  }
+  if (hxNext) {
+    hxNext.addEventListener("click", hxAdvance);
+    hxApprove.addEventListener("click", function () { hxDecide(true); });
+    hxReject.addEventListener("click", function () { hxDecide(false); });
+    hxRestart.addEventListener("click", hxReset);
   }
 
   /* ---------------- Init ---------------- */

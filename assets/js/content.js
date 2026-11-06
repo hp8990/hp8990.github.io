@@ -32,6 +32,50 @@ window.SITE = {
 };
 
 /*
+  Agent harness demo in the introduction. A simulated run, steps in order.
+  verdict: "allow" (runs automatically), "approval" (the visitor approves or rejects),
+           "steer" (the harness rewrites the action into a safer one), "block" (refused).
+*/
+window.HARNESS = [
+  {
+    tool: "read_table(\"products\")",
+    action: { en: "Read the product table", fr: "Lire la table des produits" },
+    verdict: "allow",
+    reason: { en: "Read-only tools run without review.", fr: "Les outils en lecture seule s'exécutent sans validation." },
+    result: { en: "48,210 rows read.", fr: "48 210 lignes lues." }
+  },
+  {
+    tool: "detect_outliers(column=\"price\", rule=\"IQR\")",
+    action: { en: "Flag price outliers with the IQR rule", fr: "Repérer les prix aberrants avec la règle IQR" },
+    verdict: "allow",
+    reason: { en: "Analysis only: nothing is changed.", fr: "Analyse seule : rien n'est modifié." },
+    result: { en: "37 outliers flagged.", fr: "37 valeurs aberrantes repérées." }
+  },
+  {
+    tool: "fill_missing(column=\"colour\", source=\"supplier\")",
+    action: { en: "Fill 312 missing colours from the supplier catalogue", fr: "Compléter 312 couleurs manquantes depuis le catalogue fournisseur" },
+    verdict: "approval",
+    reason: { en: "This action changes the data, so a person must approve it.", fr: "Cette action modifie les données : une personne doit la valider." },
+    approved: { en: "312 rows updated.", fr: "312 lignes mises à jour." },
+    rejected: { en: "Skipped. No data changed.", fr: "Ignorée. Aucune donnée modifiée." }
+  },
+  {
+    tool: "delete_rows(filter=\"duplicates\")",
+    action: { en: "Delete 1,204 suspected duplicates", fr: "Supprimer 1 204 doublons présumés" },
+    verdict: "steer",
+    steerTo: "flag_rows(filter=\"duplicates\")",
+    reason: { en: "Deletion is not allowed. The harness turns it into flagging the rows for review.", fr: "La suppression est interdite. Le harness la transforme en signalement des lignes pour relecture." },
+    result: { en: "1,204 rows flagged for review.", fr: "1 204 lignes signalées pour relecture." }
+  },
+  {
+    tool: "send_email(to=\"client\")",
+    action: { en: "Email the cleaned file to the client", fr: "Envoyer le fichier nettoyé au client par e-mail" },
+    verdict: "block",
+    reason: { en: "Agents may not contact people outside the team.", fr: "Les agents ne peuvent pas contacter de personnes extérieures à l'équipe." }
+  }
+];
+
+/*
   "What I bring" section, shown right after the introduction.
   points: what working with me looks like. results: proof, each linked to its project.
   figureSr is what screen readers say instead of the figure, when the figure uses symbols.
@@ -184,49 +228,6 @@ window.PROJECTS = [
     },
     tags: ["Linux", "Windows Server", "VoIP", "Networking", "SQL", "Bash"],
     links: []
-  },
-  {
-    id: "keystrokes",
-    track: "ai",
-    kind: "personal",
-    year: "",
-    title: { en: "Keystroke dynamics biometrics", fr: "Biométrie par dynamique de frappe" },
-    summary: {
-      en: "Identifying a typist from how they type, not what they type. I recorded key timings for the left hand, right hand and both hands, then compared hold time against the pause between keys.",
-      fr: "Reconnaître une personne à sa façon de taper, et non à ce qu'elle tape. J'ai enregistré les temps de frappe main gauche, main droite et deux mains, puis comparé le temps d'appui au temps entre deux touches."
-    },
-    tags: ["Python", "Biometrics", "Matplotlib"],
-    image: "assets/img/projects/keystrokes.jpg",
-    imageAlt: { en: "Scatter plot of hold time and dwell time for each key pressed", fr: "Nuage de points des temps d'appui et de vol pour chaque touche" },
-    links: []
-  },
-  {
-    id: "facial-expression",
-    track: "ai",
-    kind: "personal",
-    year: "",
-    title: { en: "Facial expression recognition", fr: "Reconnaissance des expressions faciales" },
-    summary: {
-      en: "Recognising the seven universal facial expressions from a webcam feed, with data augmentation and transfer learning on VGG19.",
-      fr: "Reconnaissance des sept expressions faciales universelles depuis une webcam, avec augmentation de données et transfer learning sur VGG19."
-    },
-    tags: ["TensorFlow", "Keras", "VGG19", "Computer vision"],
-    image: "assets/img/projects/facial-expression.jpg",
-    imageAlt: { en: "Webcam frame with a detected face labelled Surprise", fr: "Image webcam avec un visage détecté étiqueté Surprise" },
-    links: []
-  },
-  {
-    id: "iris-tracking",
-    track: "ai",
-    kind: "personal",
-    year: "",
-    title: { en: "Real-time iris tracking", fr: "Suivi de l'iris en temps réel" },
-    summary: {
-      en: "Webcam eye and iris tracking with OpenCV and Dlib, using the 68-point facial landmark model to follow the eyes frame by frame.",
-      fr: "Suivi des yeux et de l'iris par webcam avec OpenCV et Dlib, à l'aide du modèle à 68 points de repère du visage."
-    },
-    tags: ["Python", "OpenCV", "Dlib"],
-    links: [{ label: { en: "Source code", fr: "Code source" }, href: "projects/iris_tracking.py" }]
   },
   {
     id: "genai-genealogy",

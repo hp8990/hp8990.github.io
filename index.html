@@ -66,24 +66,23 @@
         </div>
       </div>
 
-      <figure class="demo" aria-labelledby="demoTitle">
+      <figure class="demo harness" aria-labelledby="harnessTitle">
         <div class="demo-head">
-          <h2 id="demoTitle" class="demo-title" data-i18n="demo.title">Your typing rhythm</h2>
-          <p class="demo-sub" data-i18n="demo.sub">Behavioural biometrics, live. Type anything and watch how long you hold each key and how long you pause between keys.</p>
+          <h2 id="harnessTitle" class="demo-title" data-i18n="harness.title">Agent harness, live</h2>
+          <p class="demo-sub" data-i18n="harness.sub">An AI agent is cleaning a product catalogue. Every action it proposes goes through the harness first: a policy check, your approval when needed, and an audit log. You are the reviewer.</p>
         </div>
-        <label class="visually-hidden" for="demoInput" data-i18n="demo.label">Type here to measure your keystrokes</label>
-        <input id="demoInput" class="demo-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type your name…" data-i18n-placeholder="demo.placeholder">
-        <svg class="demo-plot" id="demoPlot" role="img" aria-labelledby="demoSummary"></svg>
-        <p class="visually-hidden" id="demoSummary"></p>
-        <div class="demo-legend">
-          <span class="key key-dwell"><i></i><span data-i18n="demo.dwell">Hold time</span> <b class="num" id="avgDwell">–</b></span>
-          <span class="key key-flight"><i></i><span data-i18n="demo.flight">Pause between keys</span> <b class="num" id="avgFlight">–</b></span>
-          <button type="button" class="demo-reset" id="demoReset" data-i18n="demo.reset">Clear</button>
+        <div class="hx-step" id="hxStep" aria-live="polite"></div>
+        <div class="hx-actions">
+          <button type="button" class="btn btn-solid" id="hxNext" data-i18n="harness.next">Run next action</button>
+          <button type="button" class="btn btn-solid" id="hxApprove" hidden data-i18n="harness.approve">Approve</button>
+          <button type="button" class="btn btn-line" id="hxReject" hidden data-i18n="harness.reject">Reject</button>
+          <button type="button" class="demo-reset" id="hxRestart" data-i18n="harness.restart">Restart</button>
         </div>
+        <h3 class="hx-log-title" data-i18n="harness.log">Audit log</h3>
+        <ol class="hx-log" id="hxLog"></ol>
         <figcaption class="demo-note">
-          <span data-i18n="demo.note">Nothing you type leaves your browser. This is the idea behind my</span>
-          <a href="#project-keystrokes" data-i18n="demo.noteLink">keystroke dynamics project</a>.
-          <span class="touch-note" id="touchNote" hidden data-i18n="demo.touch">On touch keyboards only pauses can be measured.</span>
+          <span data-i18n="harness.note">Simulated run with sample data. The ideas behind it are in my article</span>
+          <a href="https://dev.to/hantz_peterthermoris_f64/learn-the-harness-concepts-before-you-learn-the-framework-12l2" target="_blank" rel="noopener" lang="en">Learn the Harness Concepts Before You Learn the Framework</a>.
         </figcaption>
       </figure>
     </section>

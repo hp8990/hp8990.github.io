@@ -63,7 +63,7 @@ This repository is the source of the portfolio site, served by GitHub Pages at h
 
 | Section | Contents |
 | --- | --- |
-| Introduction | Who Hantz is, plus a live typing-rhythm demo based on his keystroke biometrics project |
+| Introduction | Who Hantz is, plus an interactive agent harness demo: a simulated agent whose actions are allowed, sent for the visitor's approval, steered or blocked, with an audit log |
 | What I bring | Four strengths and three measured results, each linked to its project |
 | What I do | Two tracks: systems, cloud & DevOps, and data science & AI, each with its main tools |
 | Selected work | Client projects and personal projects, filterable by IT & infrastructure, data science, or AI & LLMs |
@@ -81,10 +81,10 @@ Light and dark themes follow the visitor's system setting and can be switched ma
 | `index.html` | The single page of the site |
 | `assets/js/content.js` | **All portfolio content**: strengths and results, projects, timeline, articles, links and settings |
 | `assets/js/i18n.js` | Interface text (menus, buttons, messages) in English and French |
-| `assets/js/main.js` | Page behaviour: language and theme switch, project filters, GitHub and DEV loading, typing demo |
+| `assets/js/main.js` | Page behaviour: language and theme switch, project filters, GitHub and DEV loading, agent harness demo |
 | `assets/css/site.css` | All styles, including the dark theme |
 | `assets/img/` | Portrait and project images |
-| `projects/` | Material linked from project entries: the generative AI genealogy map, the NBA analysis notebook, the iris-tracking script, and datasets in `projects/data/` |
+| `projects/` | Material linked from project entries: the generative AI genealogy map, the NBA analysis notebook, and datasets in `projects/data/` |
 | `docs/` | The public CV in English and French (PDF) |
 | `archive/` | Earlier drafts of the site, kept for reference and not linked from the homepage |
 | `ms70602493.txt` | Microsoft 365 domain verification file. It must stay at the root. |
@@ -93,6 +93,7 @@ Light and dark themes follow the visitor's system setting and can be switched ma
 
 Almost every change happens in `assets/js/content.js`. Each text field has an `en` and an `fr` version, so fill in both.
 
+- **Agent harness demo:** the steps of the simulated run are in `HARNESS` in `content.js`. Each has a tool call, an action and a verdict (`allow`, `approval`, `steer` or `block`) with its explanation.
 - **What I bring:** edit `VALUE` in `content.js`. `points` are the strengths; `results` are the figures, each with a short label, a context line and the `id` of the project it links to.
 - **Add a project:** copy an entry in `PROJECTS`. Set `track` to `it`, `data` or `ai` (this drives the filters) and `kind` to `client` or `personal`. An `image` is optional; if you add one, give it an `imageAlt` description in both languages.
 - **Add a career step:** add an entry to `TIMELINE`, newest first. Mark education entries with `edu: true`.
@@ -124,4 +125,4 @@ When adding content, keep it that way:
 
 ## Privacy
 
-There are no cookies, analytics or third-party trackers. The typing demo runs entirely in the visitor's browser, and nothing typed is sent anywhere. The browser stores only the chosen language and theme, plus a 30-minute cache of the DEV list (and the GitHub list when enabled). The page requests data only from Google Fonts and the DEV API, plus the GitHub API when that section is enabled.
+There are no cookies, analytics or third-party trackers. The agent harness demo is a simulation that runs entirely in the visitor's browser. The browser stores only the chosen language and theme, plus a 30-minute cache of the DEV list (and the GitHub list when enabled). The page requests data only from Google Fonts and the DEV API, plus the GitHub API when that section is enabled.
