@@ -14,10 +14,11 @@ window.SITE = {
     github: "https://github.com/hp8990",
     kaggle: "https://www.kaggle.com/thermorishantzpeter",
     devto: "https://dev.to/hantz_peterthermoris_f64",
-    cv: "docs/Hantz-Peter-Thermoris-CV.pdf"
+    // Path to your CV PDF, e.g. "docs/Hantz-Peter-Thermoris-CV.pdf". Leave empty to hide the CV buttons.
+    cv: ""
   },
   // Shown next to CV links for accessibility. Update if you replace the PDF.
-  cvSize: "144 KB"
+  cvSize: ""
 };
 
 /*

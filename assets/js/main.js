@@ -48,6 +48,13 @@
     if (md) md.setAttribute("content", t("meta.desc"));
     var tt = document.getElementById("themeToggle");
     if (tt) tt.setAttribute("aria-label", t("theme.label"));
+    // CV buttons only appear when a CV path is set in content.js
+    var cv = SITE.links && SITE.links.cv;
+    document.querySelectorAll(".cv-link").forEach(function (a) {
+      if (cv) a.setAttribute("href", cv);
+      var host = a.closest(".cv-item") || a;
+      host.hidden = !cv;
+    });
     document.querySelectorAll(".cv-link .file-info").forEach(function (n) {
       n.textContent = "(" + t("pdf") + (SITE.cvSize ? ", " + SITE.cvSize : "") + ")";
     });
