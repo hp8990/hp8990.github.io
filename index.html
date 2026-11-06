@@ -30,21 +30,21 @@
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#top" aria-label="Hantz Peter B. Thermoris, home">
+      <a class="brand" href="#top">
         <span class="brand-mark" aria-hidden="true">HT</span>
         <span class="brand-name">Hantz Thermoris</span>
       </a>
-      <nav class="nav" aria-label="Main">
+      <nav class="nav" aria-label="Main" data-i18n-aria="nav.label">
         <a href="#work" data-i18n="nav.work">Work</a>
         <a href="#path" data-i18n="nav.path">Path</a>
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
       <div class="controls">
-        <div class="lang-switch" role="group" aria-label="Language">
-          <button type="button" data-lang="en" aria-pressed="false">EN</button>
-          <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+        <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria="lang.label">
+          <button type="button" data-lang="en" aria-pressed="false">EN<span class="visually-hidden" lang="en"> English</span></button>
+          <button type="button" data-lang="fr" aria-pressed="false">FR<span class="visually-hidden" lang="fr"> Français</span></button>
         </div>
-        <button type="button" class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <button type="button" class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Dark mode">
           <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
           <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
         </button>
@@ -52,7 +52,7 @@
     </div>
   </header>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <!-- HERO -->
     <section class="hero wrap" id="top">
       <div class="hero-text">
@@ -61,7 +61,7 @@
         <p class="lede" data-i18n="hero.lede">Data scientist and LLM/AI engineer. Nearly four years building production AI, from anomaly detection on billions of bank transactions to multi-agent LLM pipelines, after six years running servers and networks.</p>
         <div class="hero-actions">
           <a class="btn btn-solid" href="#work" data-i18n="hero.work">See my work</a>
-          <a class="btn btn-line" id="cvLink" href="docs/Hantz-Peter-Thermoris-CV.pdf" data-i18n="hero.cv">Download CV (PDF)</a>
+          <a class="btn btn-line cv-link" href="docs/Hantz-Peter-Thermoris-CV.pdf" type="application/pdf" download><span data-i18n="hero.cv">Download CV</span>&nbsp;<span class="file-info"></span></a>
         </div>
       </div>
 
@@ -72,7 +72,8 @@
         </div>
         <label class="visually-hidden" for="demoInput" data-i18n="demo.label">Type here to measure your keystrokes</label>
         <input id="demoInput" class="demo-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type your name…" data-i18n-placeholder="demo.placeholder">
-        <svg class="demo-plot" id="demoPlot" role="img" aria-label="Chart of key hold and pause times"></svg>
+        <svg class="demo-plot" id="demoPlot" role="img" aria-labelledby="demoSummary"></svg>
+        <p class="visually-hidden" id="demoSummary"></p>
         <div class="demo-legend">
           <span class="key key-dwell"><i></i><span data-i18n="demo.dwell">Hold time</span> <b class="num" id="avgDwell">–</b></span>
           <span class="key key-flight"><i></i><span data-i18n="demo.flight">Pause between keys</span> <b class="num" id="avgFlight">–</b></span>
@@ -109,14 +110,15 @@
     <section class="work wrap" id="work" aria-labelledby="workTitle">
       <div class="section-head">
         <h2 id="workTitle" data-i18n="work.title">Selected work</h2>
-        <div class="filters" role="group" aria-label="Filter projects" id="filters">
+        <div class="filters" role="group" aria-label="Filter projects" data-i18n-aria="filter.label" id="filters">
           <button type="button" data-filter="all" aria-pressed="true" data-i18n="filter.all">All</button>
           <button type="button" data-filter="it" aria-pressed="false" data-i18n="filter.it">IT & infrastructure</button>
           <button type="button" data-filter="data" aria-pressed="false" data-i18n="filter.data">Data science</button>
           <button type="button" data-filter="ai" aria-pressed="false" data-i18n="filter.ai">AI & LLMs</button>
         </div>
       </div>
-      <ol class="projects" id="projects" aria-live="polite"></ol>
+      <p class="visually-hidden" role="status" id="filterStatus"></p>
+      <ol class="projects" id="projects"></ol>
     </section>
 
     <!-- GITHUB -->
@@ -163,7 +165,7 @@
         <li><a href="https://www.linkedin.com/in/hantz-peter-b-thermoris/" target="_blank" rel="noopener">LinkedIn</a></li>
         <li><a href="https://github.com/hp8990" target="_blank" rel="noopener">GitHub</a></li>
         <li><a href="https://www.kaggle.com/thermorishantzpeter" target="_blank" rel="noopener">Kaggle</a></li>
-        <li><a href="docs/Hantz-Peter-Thermoris-CV.pdf" data-i18n="contact.cv">CV (PDF)</a></li>
+        <li><a class="cv-link" href="docs/Hantz-Peter-Thermoris-CV.pdf" type="application/pdf" download><span data-i18n="contact.cv">CV</span>&nbsp;<span class="file-info"></span></a></li>
       </ul>
     </section>
   </main>

@@ -39,14 +39,42 @@
     document.querySelectorAll(".lang-switch button").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang));
     });
+    document.querySelectorAll("[data-i18n-aria]").forEach(function (n) {
+      n.setAttribute("aria-label", t(n.getAttribute("data-i18n-aria")));
+    });
+    document.title = t("meta.title");
+    var md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute("content", t("meta.desc"));
     var tt = document.getElementById("themeToggle");
-    if (tt) tt.setAttribute("aria-label", t("theme.toggle"));
-    var plot = document.getElementById("demoPlot");
-    if (plot) plot.setAttribute("aria-label", t("chart.label"));
+    if (tt) tt.setAttribute("aria-label", t("theme.label"));
+    document.querySelectorAll(".cv-link .file-info").forEach(function (n) {
+      n.textContent = "(" + t("pdf") + (SITE.cvSize ? ", " + SITE.cvSize : "") + ")";
+    });
     renderProjects(false);
     renderTimeline();
     renderRepos();
     drawDemo();
+    markNewTabs(document);
+  }
+
+  /* Links opening a new tab announce it, and show a small arrow */
+  function markNewTabs(scope) {
+    scope.querySelectorAll('a[target="_blank"]').forEach(function (a) {
+      var sr = a.querySelector(".nt-text");
+      if (!sr) {
+        var icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        icon.setAttribute("class", "nt-icon");
+        icon.setAttribute("viewBox", "0 0 12 12");
+        icon.setAttribute("aria-hidden", "true");
+        icon.setAttribute("focusable", "false");
+        icon.innerHTML = '<path d="M4 2h6v6M10 2L3 9"/>';
+        sr = el("span", "visually-hidden nt-text");
+        var host = a.querySelector(".repo-name") || a;
+        host.appendChild(icon);
+        host.appendChild(sr);
+      }
+      sr.textContent = " " + t("newTab");
+    });
   }
   document.querySelectorAll(".lang-switch button").forEach(function (b) {
     b.addEventListener("click", function () {
@@ -63,11 +91,18 @@
     if (set) return set === "dark";
     return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   }
+  function syncTheme() { if (themeBtn) themeBtn.setAttribute("aria-pressed", String(isDark())); }
   if (themeBtn) themeBtn.addEventListener("click", function () {
     var next = isDark() ? "light" : "dark";
     root.setAttribute("data-theme", next);
     store("theme", next);
+    syncTheme();
   });
+  if (window.matchMedia) {
+    var mq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (mq.addEventListener) mq.addEventListener("change", syncTheme);
+  }
+  syncTheme();
 
   /* ---------------- Projects ---------------- */
   var filter = "all";
@@ -85,9 +120,12 @@
 
       var meta = el("div", "project-meta");
       if (p.year) meta.appendChild(el("span", "yr", p.year));
+      var tr = el("span", "track");
       var dot = el("span", "track-dot t-" + p.track); dot.setAttribute("aria-hidden", "true");
-      meta.appendChild(dot);
-      meta.appendChild(document.createTextNode(t("kind." + p.kind)));
+      tr.appendChild(dot);
+      tr.appendChild(document.createTextNode(t("track." + p.track)));
+      meta.appendChild(tr);
+      meta.appendChild(el("span", "kind", t("kind." + p.kind)));
       li.appendChild(meta);
 
       var body = el("div", "project-body");
@@ -126,6 +164,10 @@
         x.setAttribute("aria-pressed", String(x === b));
       });
       renderProjects(true);
+      markNewTabs(list);
+      var shown = PROJECTS.filter(function (p) { return filter === "all" || p.track === filter; }).length;
+      var st = document.getElementById("filterStatus");
+      if (st) st.textContent = t("filter.status").replace("{n}", shown).replace("{total}", PROJECTS.length);
     });
   });
 
@@ -182,6 +224,7 @@
       a.appendChild(meta);
       li.appendChild(a); ul.appendChild(li);
     });
+    markNewTabs(ul);
   }
   function loadRepos() {
     var user = SITE.githubUser;
@@ -285,6 +328,13 @@
     var af = avg(strokes.map(function (s) { return s.flight; }));
     document.getElementById("avgDwell").textContent = ad == null ? "–" : ad + " ms";
     document.getElementById("avgFlight").textContent = af == null ? "–" : af + " ms";
+    var sum = document.getElementById("demoSummary");
+    if (sum) {
+      sum.textContent = !strokes.length ? t("demo.summaryEmpty") :
+        t("demo.summary").replace("{n}", strokes.length)
+          .replace("{d}", ad == null ? "–" : ad + " ms")
+          .replace("{f}", af == null ? "–" : af + " ms");
+    }
   }
 
   function push(s) {

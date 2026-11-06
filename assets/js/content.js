@@ -12,7 +12,9 @@ window.SITE = {
     github: "https://github.com/hp8990",
     kaggle: "https://www.kaggle.com/thermorishantzpeter",
     cv: "docs/Hantz-Peter-Thermoris-CV.pdf"
-  }
+  },
+  // Shown next to CV links for accessibility. Update if you replace the PDF.
+  cvSize: "144 KB"
 };
 
 /*
