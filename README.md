@@ -1,10 +1,57 @@
-# hp8990.github.io
+# Hantz Peter B. Thermoris
 
-The personal portfolio of **Hantz Peter B. Thermoris**, data scientist and LLM/AI engineer with six years of prior experience in systems and networks.
+**Data Scientist and AI Engineer (LLM), based in France.**
+Portfolio: https://hp8990.github.io | [Version française](#version-française)
 
-**Live site:** https://hp8990.github.io
+## Who I am
 
-## Goals
+I build machine learning and LLM systems that hold up in production. Since 2022 I have delivered machine learning for clients in banking, trading, real estate and consulting. Since 2025 I have focused on LLM systems: RAG, multi-agent pipelines, and the agent harnesses that keep them under control.
+
+Before data science, I spent six years running servers, networks and phone systems for an international program. That background shapes how I work: I think about reliability, security and operations from the first day of a project, not after it ships.
+
+## The value I bring
+
+- **Measurable results.** A RAG decision engine for a trading group returned +40% over 7 months. Anomaly detection on billions of La Banque Postale transactions reached an alert conversion rate of nearly 20% on certain scenarios. Rebuilding a VoIP system cut dropped calls from 60% to 2%.
+- **LLM systems that stay under control.** I design the agent harness around the models: tools exposed through MCP, human approval steps and full audit trails, so automation stays safe, traceable and GDPR-compliant.
+- **From business need to production.** I run workshops with business teams, turn their requirements into detection scenarios and specifications, then deliver the pipeline, the model and the monitoring dashboards.
+- **Infrastructure fluency.** Years of Linux, Windows Server, networking and databases mean I can deploy on Azure, AWS or on-premise without handing off the hard parts.
+- **Bilingual.** French native, English fluent (C1).
+
+**Certifications:** AWS Certified AI Practitioner; Microsoft Certified: Azure Data Scientist Associate, Power BI Data Analyst Associate, Azure Fundamentals, Azure AI Fundamentals.
+
+**Find me:** [LinkedIn](https://www.linkedin.com/in/hantz-peter-b-thermoris/) | [Articles on DEV](https://dev.to/hantz_peterthermoris_f64) | CV in [English](https://hp8990.github.io/docs/Hantz-Peter-Thermoris-CV-EN.pdf) or [French](https://hp8990.github.io/docs/Hantz-Peter-Thermoris-CV-FR.pdf)
+
+---
+
+## Version française
+
+**Data Scientist et Ingénieur IA (LLM), basé en France.**
+
+### Qui je suis
+
+Je conçois des systèmes de machine learning et de LLM qui tiennent en production. Depuis 2022, je livre du machine learning pour des clients de la banque, du trading, de l'immobilier et du conseil. Depuis 2025, je me concentre sur les systèmes LLM : RAG, pipelines multi-agents et agent harness qui les maintiennent sous contrôle.
+
+Avant la data science, j'ai passé six ans à administrer des serveurs, des réseaux et des systèmes téléphoniques pour un programme international. Ce parcours guide ma façon de travailler : je pense fiabilité, sécurité et exploitation dès le premier jour d'un projet, pas après sa mise en ligne.
+
+### Ce que j'apporte
+
+- **Des résultats mesurables.** Un moteur de décision RAG pour un groupe de trading a généré +40 % de rendement sur 7 mois. La détection d'anomalies sur des milliards de transactions de La Banque Postale a atteint près de 20 % de transformation des alertes sur certains scénarios. La refonte d'un système VoIP a fait passer les appels perdus de 60 % à 2 %.
+- **Des systèmes LLM sous contrôle.** Je conçois l'agent harness autour des modèles : outils exposés via MCP, étapes de validation humaine et journaux d'audit complets, pour une automatisation sûre, traçable et conforme au RGPD.
+- **Du besoin métier à la production.** J'anime des ateliers avec les équipes métier, je traduis leurs besoins en scénarios de détection et en spécifications, puis je livre le pipeline, le modèle et les tableaux de bord de suivi.
+- **Une maîtrise de l'infrastructure.** Des années de Linux, Windows Server, réseaux et bases de données me permettent de déployer sur Azure, AWS ou on-premise sans déléguer les parties difficiles.
+- **Bilingue.** Français langue maternelle, anglais courant (C1).
+
+**Certifications :** AWS Certified AI Practitioner ; Microsoft Certified : Azure Data Scientist Associate, Power BI Data Analyst Associate, Azure Fundamentals, Azure AI Fundamentals.
+
+**Me retrouver :** [LinkedIn](https://www.linkedin.com/in/hantz-peter-b-thermoris/) | [Articles sur DEV](https://dev.to/hantz_peterthermoris_f64) | CV en [français](https://hp8990.github.io/docs/Hantz-Peter-Thermoris-CV-FR.pdf) ou en [anglais](https://hp8990.github.io/docs/Hantz-Peter-Thermoris-CV-EN.pdf)
+
+---
+
+# About this repository
+
+This repository is the source of the portfolio site, served by GitHub Pages at https://hp8990.github.io.
+
+## Goals of the site
 
 - **Show both sides of the profile.** Machine learning in production since 2022 and LLM systems since 2025 (RAG, multi-agent pipelines), next to the infrastructure background they grew from, for recruiters, hiring managers and clients.
 - **Speak to French and international readers.** Every piece of text exists in English and French, and visitors can switch at any time.
