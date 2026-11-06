@@ -49,14 +49,14 @@
     var tt = document.getElementById("themeToggle");
     if (tt) tt.setAttribute("aria-label", t("theme.label"));
     // CV buttons only appear when a CV path is set in content.js
-    var cv = SITE.links && SITE.links.cv;
+    var cv = pick(SITE.links && SITE.links.cv);
     document.querySelectorAll(".cv-link").forEach(function (a) {
-      if (cv) a.setAttribute("href", cv);
+      if (cv) { a.setAttribute("href", cv); a.setAttribute("hreflang", lang); }
       var host = a.closest(".cv-item") || a;
       host.hidden = !cv;
     });
     document.querySelectorAll(".cv-link .file-info").forEach(function (n) {
-      var size = SITE.cvSize || "";
+      var size = pick(SITE.cvSize) || "";
       if (lang === "fr") size = size.replace(/\bKB\b/, "Ko").replace(/\bMB\b/, "Mo");
       n.textContent = "(" + t("pdf") + (size ? ", " + size : "") + ")";
     });
@@ -248,8 +248,9 @@
   }
   function loadRepos() {
     var user = SITE.githubUser;
+    var pick = (SITE.githubRepos || []).map(function (n) { return String(n).toLowerCase(); });
     var sec = document.getElementById("repos");
-    if (!user) { if (sec) sec.hidden = true; return; }   // section stays hidden
+    if (!user || !pick.length) { if (sec) sec.hidden = true; return; }   // hidden unless repos are chosen
     if (sec) sec.hidden = false;
     var all = document.getElementById("reposAll");
     if (all) all.href = "https://github.com/" + encodeURIComponent(user);
@@ -268,8 +269,8 @@
       .then(function (res) { if (!res.ok) throw new Error(res.status); return res.json(); })
       .then(function (data) {
         var repos = (Array.isArray(data) ? data : [])
-          .filter(function (r) { return !r.fork && !r.archived && r.name.toLowerCase() !== (user + ".github.io").toLowerCase(); })
-          .slice(0, 6)
+          .filter(function (r) { return pick.indexOf(r.name.toLowerCase()) !== -1; })
+          .sort(function (a, b) { return pick.indexOf(a.name.toLowerCase()) - pick.indexOf(b.name.toLowerCase()); })
           .map(function (r) { return { name: r.name, html_url: r.html_url, description: r.description, language: r.language, pushed_at: r.pushed_at }; });
         repoState = { status: repos.length ? "ok" : "empty", repos: repos };
         try { sessionStorage.setItem(cacheKey, JSON.stringify({ at: Date.now(), repos: repos })); } catch (e) {}

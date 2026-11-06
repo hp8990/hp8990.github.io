@@ -7,6 +7,9 @@ window.SITE = {
   // GitHub username for the "Latest on GitHub" section. Leave empty to hide the section.
   // Example: "hp8990"
   githubUser: "",
+  // Repositories to show when the GitHub section is on. Only these appear, in this order.
+  // Leave empty to show none. Example: ["DataScience", "coding-challenge-"]
+  githubRepos: [],
   // DEV (dev.to) username: the Writing section loads the latest articles live
   devtoUser: "hantz_peterthermoris_f64",
   // Leave empty to hide the email link. Example: "prenom.nom@example.com"
@@ -18,11 +21,14 @@ window.SITE = {
     github: "",
     kaggle: "",
     devto: "https://dev.to/hantz_peterthermoris_f64",
-    // Path to your CV PDF, e.g. "docs/Hantz-Peter-Thermoris-CV.pdf". Leave empty to hide the CV buttons.
-    cv: "docs/Hantz-Peter-Thermoris-CV.pdf"
+    // CV PDF for each page language. Leave both empty to hide the CV buttons.
+    cv: {
+      en: "docs/Hantz-Peter-Thermoris-CV-EN.pdf",
+      fr: "docs/Hantz-Peter-Thermoris-CV-FR.pdf"
+    }
   },
   // Shown next to CV links for accessibility. Update if you replace the PDF.
-  cvSize: "75 KB"
+  cvSize: { en: "74 KB", fr: "76 KB" }
 };
 
 /*
@@ -40,10 +46,10 @@ window.PROJECTS = [
     org: "StarClay",
     title: { en: "Multi-agent data cleaning platform", fr: "Plateforme multi-agents de nettoyage de données" },
     summary: {
-      en: "H-Cleanser-ERP turns massive, messy luxury-sector datasets into reliable structured data. Four LLM agents (explorer, analyst, enricher, curator) run on LangGraph with Gemini or local models through Ollama, a custom MCP server exposes 11 data tools, and every correction passes through a persistent human approval step with a full audit trail.",
-      fr: "H-Cleanser-ERP transforme des jeux de données massifs et hétérogènes du secteur du luxe en données structurées et fiables. Quatre agents LLM (explorer, analyst, enricher, curator) tournent sur LangGraph avec Gemini ou des modèles locaux via Ollama, un serveur MCP expose 11 outils de données, et chaque correction passe par une validation humaine persistante avec journal d'audit complet."
+      en: "H-Cleanser-ERP turns massive, messy luxury-sector datasets into reliable structured data. Four LLM agents (explorer, analyst, enricher, curator) run on LangGraph with Gemini or local models through Ollama, and an agent harness keeps them in check: a custom MCP server exposing 11 data tools, a persistent human approval step and a full audit trail.",
+      fr: "H-Cleanser-ERP transforme des jeux de données massifs et hétérogènes du secteur du luxe en données structurées et fiables. Quatre agents LLM (explorer, analyst, enricher, curator) tournent sur LangGraph avec Gemini ou des modèles locaux via Ollama, et un agent harness les encadre : serveur MCP exposant 11 outils de données, validation humaine persistante et journal d'audit complet."
     },
-    tags: ["LangGraph", "Gemini", "MCP", "FastAPI", "Celery", "Polars", "PostgreSQL", "Docker"],
+    tags: ["LangGraph", "Agent harness", "Gemini", "MCP", "FastAPI", "Celery", "Polars", "PostgreSQL", "Docker"],
     links: []
   },
   {
