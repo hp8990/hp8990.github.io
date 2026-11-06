@@ -308,14 +308,14 @@ window.TIMELINE = [
 
 /*
   Writing hosted on this site. Always shown in the Writing section, next to the DEV articles.
-  lang is the language the piece is written in.
+  lang is the language the piece is written in; leave it out when title and url exist in both languages.
 */
 window.WRITING_PINNED = [
   {
-    title: "Généalogie de l'IA générative",
-    url: "projects/genealogie-ia-generative.html",
+    // available in both languages: each page links to its own version
+    title: { en: "Genealogy of Generative AI", fr: "Généalogie de l'IA générative" },
+    url: { en: "projects/generative-ai-genealogy.html", fr: "projects/genealogie-ia-generative.html" },
     date: "2026-10-14",
-    lang: "fr",
     tags: ["ai", "research", "interactive"],
     summary: {
       en: "An interactive map of the research papers behind today's generative AI, with a note card for each paper and a chronological index.",

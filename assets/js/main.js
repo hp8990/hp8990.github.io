@@ -339,7 +339,8 @@
       return String(y.date).slice(0, 10) < String(x.date).slice(0, 10) ? -1 : 1;
     });
     all.forEach(function (a) {
-      var itemLang = a.lang || "en";            // DEV articles are written in English
+      var url = pick(a.url);
+      var itemLang = a.lang || (typeof a.url === "object" ? lang : "en");   // DEV articles are written in English
       var li = el("li", "article");
       li.setAttribute("lang", itemLang);
       var meta = el("div", "article-meta");
@@ -352,14 +353,14 @@
         var note = el("span", "article-lang", t(itemLang === "fr" ? "writing.inFrench" : "writing.inEnglish"));
         note.setAttribute("lang", lang); meta.appendChild(note);
       }
-      if (!/^https?:/.test(a.url)) {
+      if (!/^https?:/.test(url)) {
         var kind = el("span", "article-lang", t("writing.onSite")); kind.setAttribute("lang", lang); meta.appendChild(kind);
       }
       li.appendChild(meta);
       var body = el("div", "article-body");
       var h = el("h3");
-      var link = el("a", null, a.title); link.href = a.url;
-      if (/^https?:/.test(a.url)) { link.target = "_blank"; link.rel = "noopener"; }
+      var link = el("a", null, pick(a.title)); link.href = url;
+      if (/^https?:/.test(url)) { link.target = "_blank"; link.rel = "noopener"; }
       h.appendChild(link); body.appendChild(h);
       if (a.summary) {
         var sum = el("p", null, pick(a.summary));

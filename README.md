@@ -84,7 +84,7 @@ Light and dark themes follow the visitor's system setting and can be switched ma
 | `assets/js/main.js` | Page behaviour: language and theme switch, project filters, GitHub and DEV loading, agent harness demo |
 | `assets/css/site.css` | All styles, including the dark theme |
 | `assets/img/` | Portrait and project images |
-| `projects/` | Material linked from the site: the generative AI genealogy map (shown under Writing), the NBA analysis notebook, and datasets in `projects/data/` |
+| `projects/` | Material linked from the site: the generative AI genealogy map in English and French (shown under Writing), the NBA analysis notebook, and datasets in `projects/data/` |
 | `docs/` | The public CV in English and French (PDF) |
 | `archive/` | Earlier drafts of the site, kept for reference and not linked from the homepage |
 | `ms70602493.txt` | Microsoft 365 domain verification file. It must stay at the root. |
