@@ -5,12 +5,15 @@
 */
 window.SITE = {
   githubUser: "hp8990",
+  // DEV (dev.to) username: the Writing section loads the latest articles live
+  devtoUser: "hantz_peterthermoris_f64",
   // Leave empty to hide the email link. Example: "prenom.nom@example.com"
   email: "",
   links: {
     linkedin: "https://www.linkedin.com/in/hantz-peter-b-thermoris/",
     github: "https://github.com/hp8990",
     kaggle: "https://www.kaggle.com/thermorishantzpeter",
+    devto: "https://dev.to/hantz_peterthermoris_f64",
     cv: "docs/Hantz-Peter-Thermoris-CV.pdf"
   },
   // Shown next to CV links for accessibility. Update if you replace the PDF.
@@ -238,5 +241,26 @@ window.TIMELINE = [
     what: { en: "Master's in Electronic Engineering (Computing & Telecoms)", fr: "Master Génie Électronique (Informatique & Télécoms)" },
     where: { en: "State University of Haiti", fr: "Université d'État d'Haïti" },
     edu: true
+  }
+];
+
+/*
+  Articles. Shown if DEV can't be reached; when it can, the latest
+  articles load automatically and new posts appear without editing this.
+*/
+window.ARTICLES = [
+  {
+    title: "Hiring AI Engineers for AI Agents: Design Skills vs. Frameworks",
+    url: "https://dev.to/hantz_peterthermoris_f64/hiring-ai-engineers-for-ai-agents-design-skills-vs-frameworks-2mj4",
+    date: "2026-10-22",
+    tags: ["ai", "agents", "softwareengineering", "career"],
+    summary: "Why teams building AI agents should hire for design skills such as policy checks, human approval steps and audit logs, rather than familiarity with one framework."
+  },
+  {
+    title: "Learn the Harness Concepts Before You Learn the Framework",
+    url: "https://dev.to/hantz_peterthermoris_f64/learn-the-harness-concepts-before-you-learn-the-framework-12l2",
+    date: "2026-09-16",
+    tags: ["ai", "python", "programming", "productivity"],
+    summary: "LangChain, Google ADK, Strands and CrewAI share the same agent control concepts under different names. Learn interception points, steering and skills once, and they carry across frameworks."
   }
 ];

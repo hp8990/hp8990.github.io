@@ -9,7 +9,7 @@ Personal portfolio of Hantz Peter B. Thermoris, data scientist and LLM/AI engine
 | `index.html` | The homepage |
 | `assets/js/content.js` | **All portfolio content**: projects, timeline, links. Edit this to update the site. |
 | `assets/js/i18n.js` | Interface text in English and French |
-| `assets/js/main.js` | Language and theme switch, project filters, live GitHub repos, keystroke demo |
+| `assets/js/main.js` | Language and theme switch, project filters, live GitHub repos and DEV articles, keystroke demo |
 | `assets/css/site.css` | Styles (light and dark themes) |
 | `assets/img/` | Portrait and project images |
 | `docs/` | CV (PDF) |
@@ -20,7 +20,8 @@ Personal portfolio of Hantz Peter B. Thermoris, data scientist and LLM/AI engine
 ## Updating
 
 - **Add a project:** copy an entry in `PROJECTS` in `assets/js/content.js`, then set `track` to `it`, `data` or `ai` and `kind` to `client` or `personal`.
-- **Replace the CV:** overwrite `docs/Hantz-Peter-Thermoris-CV.pdf`, keeping the same name.
+- **Articles:** the Writing section loads your latest posts from DEV automatically. `ARTICLES` in `content.js` is the backup list shown if DEV doesn't respond.
+- **Replace the CV:** overwrite `docs/Hantz-Peter-Thermoris-CV.pdf`, keeping the same name, and update `cvSize` in `content.js`.
 - **Show an email address:** set `email` in `assets/js/content.js`.
 
 The site is plain HTML, CSS and JavaScript with no build step, so GitHub Pages serves it as is. To preview locally, run `python3 -m http.server` in this folder and open http://localhost:8000.

@@ -4,6 +4,7 @@
   var SITE = window.SITE || {};
   var PROJECTS = window.PROJECTS || [];
   var TIMELINE = window.TIMELINE || [];
+  var ARTICLES = window.ARTICLES || [];
   var I18N = window.I18N || {};
   var root = document.documentElement;
 
@@ -53,6 +54,7 @@
     renderProjects(false);
     renderTimeline();
     renderRepos();
+    renderArticles();
     drawDemo();
     markNewTabs(document);
   }
@@ -74,6 +76,7 @@
         host.appendChild(sr);
       }
       sr.textContent = " " + t("newTab");
+      sr.setAttribute("lang", lang);
     });
   }
   document.querySelectorAll(".lang-switch button").forEach(function (b) {
@@ -120,7 +123,7 @@
 
       var meta = el("div", "project-meta");
       if (p.year) meta.appendChild(el("span", "yr", p.year));
-      var tr = el("span", "track");
+      var tr = el("span", "p-track");
       var dot = el("span", "track-dot t-" + p.track); dot.setAttribute("aria-hidden", "true");
       tr.appendChild(dot);
       tr.appendChild(document.createTextNode(t("track." + p.track)));
@@ -251,6 +254,70 @@
         renderRepos();
       })
       .catch(function () { repoState.status = "error"; renderRepos(); });
+  }
+
+  /* ---------------- Articles (DEV, live with fallback) ---------------- */
+  var articles = ARTICLES.slice();
+  function renderArticles() {
+    var ol = document.getElementById("articles");
+    if (!ol) return;
+    ol.textContent = "";
+    var fmt;
+    try { fmt = new Intl.DateTimeFormat(lang === "fr" ? "fr-FR" : "en-GB", { day: "numeric", month: "long", year: "numeric" }); } catch (e) {}
+    articles.forEach(function (a) {
+      var li = el("li", "article");
+      li.setAttribute("lang", "en");          // articles are written in English
+      var meta = el("div", "article-meta");
+      var d = new Date(a.date + (a.date.length === 10 ? "T12:00:00" : ""));
+      var time = el("time", null, fmt ? fmt.format(d) : a.date.slice(0, 10));
+      time.setAttribute("datetime", a.date.slice(0, 10));
+      time.setAttribute("lang", lang);
+      meta.appendChild(time);
+      if (lang === "fr") { var en = el("span", "article-lang", t("writing.inEnglish")); en.setAttribute("lang", "fr"); meta.appendChild(en); }
+      li.appendChild(meta);
+      var body = el("div", "article-body");
+      var h = el("h3");
+      var link = el("a", null, a.title); link.href = a.url; link.target = "_blank"; link.rel = "noopener";
+      h.appendChild(link); body.appendChild(h);
+      if (a.summary) body.appendChild(el("p", null, a.summary));
+      if (a.tags && a.tags.length) {
+        var tags = el("ul", "project-tags");
+        a.tags.slice(0, 4).forEach(function (tg) { tags.appendChild(el("li", null, "#" + tg)); });
+        body.appendChild(tags);
+      }
+      li.appendChild(body);
+      ol.appendChild(li);
+    });
+    markNewTabs(ol);
+  }
+  function loadArticles() {
+    var user = SITE.devtoUser;
+    if (!user || !window.fetch) return;
+    var cacheKey = "devto:" + user;
+    function use(list) {
+      if (!list || !list.length) return;
+      articles = list; renderArticles();
+    }
+    try {
+      var cached = JSON.parse(sessionStorage.getItem(cacheKey) || "null");
+      if (cached && Date.now() - cached.at < 30 * 60 * 1000) { use(cached.list); return; }
+    } catch (e) {}
+    fetch("https://dev.to/api/articles?username=" + encodeURIComponent(user) + "&per_page=6")
+      .then(function (res) { if (!res.ok) throw new Error(res.status); return res.json(); })
+      .then(function (data) {
+        var list = (Array.isArray(data) ? data : []).map(function (a) {
+          return {
+            title: a.title,
+            url: a.url,
+            date: a.published_at || a.published_timestamp || "",
+            tags: a.tag_list || [],
+            summary: a.description || ""
+          };
+        }).filter(function (a) { return a.title && a.url; });
+        try { sessionStorage.setItem(cacheKey, JSON.stringify({ at: Date.now(), list: list })); } catch (e) {}
+        use(list);
+      })
+      .catch(function () { /* keep the built-in list */ });
   }
 
   /* ---------------- Keystroke demo ---------------- */
@@ -394,4 +461,5 @@
   if (yr) yr.textContent = new Date().getFullYear();
   applyLang();
   loadRepos();
+  loadArticles();
 })();
