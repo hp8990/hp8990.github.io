@@ -8,7 +8,7 @@ The personal portfolio of **Hantz Peter B. Thermoris**, data scientist and LLM/A
 
 - **Show both sides of the profile.** Production AI work (LLM agents, RAG, anomaly detection at scale) next to the infrastructure background it grew from, for recruiters, hiring managers and clients.
 - **Speak to French and international readers.** Every piece of text exists in English and French, and visitors can switch at any time.
-- **Stay current with little effort.** All content lives in one file, and the latest GitHub repositories and DEV articles load on their own.
+- **Stay current with little effort.** All content lives in one file, and the latest DEV articles load on their own.
 - **Be accessible.** The site follows WCAG 2.1 AA, the standard behind France's RGAA.
 - **Stay simple.** Plain HTML, CSS and JavaScript, with no framework, no build step and no tracking.
 
@@ -20,9 +20,9 @@ The personal portfolio of **Hantz Peter B. Thermoris**, data scientist and LLM/A
 | What I do | Two tracks: systems, cloud & DevOps, and data science & AI, each with its main tools |
 | Selected work | Client projects and personal projects, filterable by IT & infrastructure, data science, or AI & LLMs |
 | Writing | Latest articles from [DEV](https://dev.to/hantz_peterthermoris_f64), loaded live |
-| Latest on GitHub | Most recently updated public repositories, loaded live |
+| Latest on GitHub | Most recently updated public repositories, loaded live. Hidden for now. |
 | Path | Career and education timeline, certifications and languages |
-| Contact | LinkedIn, GitHub, DEV and Kaggle |
+| Contact | LinkedIn and DEV (GitHub and Kaggle can be switched on) |
 
 Light and dark themes follow the visitor's system setting and can be switched manually. The language and theme choices are remembered in the visitor's browser.
 
@@ -50,6 +50,7 @@ Almost every change happens in `assets/js/content.js`. Each text field has an `e
 - **Articles:** new DEV posts appear on their own. `ARTICLES` is only the backup list shown when DEV can't be reached.
 - **Add a CV:** the CV buttons stay hidden while `cv` is empty. Put the PDF in `docs/`, set `cv` to its path and `cvSize` to its file size (for example `"180 KB"`).
 - **Show an email address:** set `email`. It stays hidden while empty.
+- **Show GitHub or Kaggle:** set `links.github` or `links.kaggle` to add them to the contact section, and `githubUser` to show the "Latest on GitHub" section. All three are empty for now.
 - **Change interface text** such as menu labels or button names in `assets/js/i18n.js`.
 
 ## Preview and publish
@@ -74,4 +75,4 @@ When adding content, keep it that way:
 
 ## Privacy
 
-There are no cookies, analytics or third-party trackers. The typing demo runs entirely in the visitor's browser, and nothing typed is sent anywhere. The browser stores only the chosen language and theme, plus a 30-minute cache of the GitHub and DEV lists. The page requests data only from Google Fonts, the GitHub API and the DEV API.
+There are no cookies, analytics or third-party trackers. The typing demo runs entirely in the visitor's browser, and nothing typed is sent anywhere. The browser stores only the chosen language and theme, plus a 30-minute cache of the DEV list (and the GitHub list when enabled). The page requests data only from Google Fonts and the DEV API, plus the GitHub API when that section is enabled.

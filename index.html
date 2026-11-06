@@ -132,10 +132,10 @@
     </section>
 
     <!-- GITHUB -->
-    <section class="repos wrap" aria-labelledby="reposTitle">
+    <section class="repos wrap" id="repos" aria-labelledby="reposTitle" hidden>
       <div class="section-head">
         <h2 id="reposTitle" data-i18n="repos.title">Latest on GitHub</h2>
-        <a class="text-link" href="https://github.com/hp8990" target="_blank" rel="noopener" data-i18n="repos.all">All repositories on GitHub</a>
+        <a class="text-link" id="reposAll" href="#" target="_blank" rel="noopener" data-i18n="repos.all">All repositories on GitHub</a>
       </div>
       <ul class="repo-list" id="repoList">
         <li class="repo-status" data-i18n="repos.loading">Loading repositories…</li>
@@ -173,9 +173,9 @@
       <p data-i18n="contact.body">Happy to talk about data science, LLM engineering and AI in production. The quickest way to reach me is LinkedIn.</p>
       <ul class="contact-links" id="contactLinks">
         <li><a href="https://www.linkedin.com/in/hantz-peter-b-thermoris/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://github.com/hp8990" target="_blank" rel="noopener">GitHub</a></li>
+        <li data-link="github" hidden><a href="#" target="_blank" rel="noopener">GitHub</a></li>
         <li><a href="https://dev.to/hantz_peterthermoris_f64" target="_blank" rel="noopener" data-i18n="contact.blog">Blog on DEV</a></li>
-        <li><a href="https://www.kaggle.com/thermorishantzpeter" target="_blank" rel="noopener">Kaggle</a></li>
+        <li data-link="kaggle" hidden><a href="#" target="_blank" rel="noopener">Kaggle</a></li>
         <li class="cv-item" hidden><a class="cv-link" href="#" type="application/pdf" download><span data-i18n="contact.cv">CV</span>&nbsp;<span class="file-info"></span></a></li>
       </ul>
     </section>

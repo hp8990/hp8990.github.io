@@ -4,15 +4,19 @@
   Source: CV "Q4 2026 - CV StarClay - Hantz T."
 */
 window.SITE = {
-  githubUser: "hp8990",
+  // GitHub username for the "Latest on GitHub" section. Leave empty to hide the section.
+  // Example: "hp8990"
+  githubUser: "",
   // DEV (dev.to) username: the Writing section loads the latest articles live
   devtoUser: "hantz_peterthermoris_f64",
   // Leave empty to hide the email link. Example: "prenom.nom@example.com"
   email: "",
   links: {
     linkedin: "https://www.linkedin.com/in/hantz-peter-b-thermoris/",
-    github: "https://github.com/hp8990",
-    kaggle: "https://www.kaggle.com/thermorishantzpeter",
+    // Leave a link empty to hide it from the contact section.
+    // Examples: "https://github.com/hp8990", "https://www.kaggle.com/thermorishantzpeter"
+    github: "",
+    kaggle: "",
     devto: "https://dev.to/hantz_peterthermoris_f64",
     // Path to your CV PDF, e.g. "docs/Hantz-Peter-Thermoris-CV.pdf". Leave empty to hide the CV buttons.
     cv: "docs/Hantz-Peter-Thermoris-CV.pdf"

@@ -201,6 +201,14 @@
     });
   }
 
+  /* ---------------- Optional contact links ---------------- */
+  document.querySelectorAll("[data-link]").forEach(function (li) {
+    var href = SITE.links && SITE.links[li.getAttribute("data-link")];
+    var a = li.querySelector("a");
+    if (href && a) a.href = href;
+    li.hidden = !href;
+  });
+
   /* ---------------- Contact email (optional) ---------------- */
   if (SITE.email) {
     var cl = document.getElementById("contactLinks");
@@ -240,7 +248,12 @@
   }
   function loadRepos() {
     var user = SITE.githubUser;
-    if (!user || !window.fetch) { repoState.status = "error"; renderRepos(); return; }
+    var sec = document.getElementById("repos");
+    if (!user) { if (sec) sec.hidden = true; return; }   // section stays hidden
+    if (sec) sec.hidden = false;
+    var all = document.getElementById("reposAll");
+    if (all) all.href = "https://github.com/" + encodeURIComponent(user);
+    if (!window.fetch) { repoState.status = "error"; renderRepos(); return; }
     var cacheKey = "repos:" + user;
     try {
       var cached = JSON.parse(sessionStorage.getItem(cacheKey) || "null");
