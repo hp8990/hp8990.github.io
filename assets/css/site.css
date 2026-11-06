@@ -278,6 +278,15 @@ button.btn-solid { border: 0; }
 .project.is-in { animation: rowin 280ms ease-out both; }
 @keyframes rowin { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
+/* Side projects: same rows, quieter */
+.side { margin-top: 44px; }
+.side-title { font-size: 1.1875rem; color: var(--slate); margin-bottom: 10px; }
+.projects-side { border-top: 1px solid var(--rule); }
+.projects-side .project { padding: 18px 0; }
+.projects-side .project-body h3 { font-size: 1.125rem; }
+.projects-side .project-body p { font-size: 0.9375rem; margin-top: 6px; }
+.projects-side .project-tags, .projects-side .project-links { margin-top: 10px; }
+
 /* ---------- Articles ---------- */
 .articles { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--ink); }
 .article { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 6px 32px; padding: 24px 0; border-bottom: 1px solid var(--rule); }

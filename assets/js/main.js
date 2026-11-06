@@ -125,8 +125,13 @@
 
   function renderProjects(animate) {
     if (!list) return;
+    var side = document.getElementById("sideProjects");
+    var sideWrap = document.getElementById("sideWrap");
     list.textContent = "";
+    if (side) side.textContent = "";
+    var sideShown = 0;
     PROJECTS.forEach(function (p) {
+      var isSide = p.kind === "personal" && side;
       var li = el("li", "project");
       li.id = "project-" + p.id;
       li.dataset.track = p.track;
@@ -140,7 +145,7 @@
       tr.appendChild(dot);
       tr.appendChild(document.createTextNode(t("track." + p.track)));
       meta.appendChild(tr);
-      meta.appendChild(el("span", "kind", t("kind." + p.kind)));
+      if (!isSide) meta.appendChild(el("span", "kind", t("kind." + p.kind)));   // the heading already says it
       li.appendChild(meta);
 
       var body = el("div", "project-body");
@@ -168,8 +173,10 @@
         var img = el("img"); img.src = p.image; img.alt = pick(p.imageAlt); img.loading = "lazy"; img.decoding = "async";
         fig.appendChild(img); li.appendChild(fig);
       }
-      list.appendChild(li);
+      if (isSide) { side.appendChild(li); if (!li.hidden) sideShown++; }
+      else list.appendChild(li);
     });
+    if (sideWrap) sideWrap.hidden = !sideShown;
   }
 
   document.querySelectorAll("#filters button").forEach(function (b) {
