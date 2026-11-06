@@ -183,6 +183,24 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .touch-note { display: block; margin-top: 4px; }
 .touch-note[hidden] { display: none; }
 
+/* ---------- What I bring ---------- */
+.value { padding-top: clamp(8px, 2vw, 24px); padding-bottom: clamp(48px, 7vw, 88px); }
+.value > h2 { margin-bottom: 28px; }
+.value-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+.value-points { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 28px 32px; }
+.vpoint h3 { font-size: 1.1875rem; }
+.vpoint p { margin-top: 8px; color: var(--slate); font-size: 0.9875rem; line-height: 1.55; }
+.value-results { border-left: 2px solid var(--teal); padding-left: clamp(20px, 3vw, 32px); }
+.value-results h3 { font-size: 1.1875rem; margin-bottom: 6px; }
+.results { list-style: none; padding: 0; margin: 0; }
+.result { padding: 16px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-items: baseline; }
+.result:last-child { border-bottom: 0; padding-bottom: 0; }
+.result-figure { font: 700 clamp(1.75rem, 3vw, 2.25rem)/1 var(--f-cond); color: var(--teal); letter-spacing: -0.02em; white-space: nowrap; }
+.result-label { font-weight: 600; font-size: 0.9875rem; }
+.result-context { grid-column: 1 / -1; margin-top: 6px; font-size: 0.9375rem; color: var(--slate); }
+.result-context a { color: inherit; }
+.result-context a:hover { color: var(--ink); }
+
 /* ---------- Tracks ---------- */
 .tracks {
   display: grid; grid-template-columns: 1fr 1fr; gap: 0;
@@ -301,6 +319,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; }
+  .value-grid { grid-template-columns: 1fr; }
   .project { grid-template-columns: 7.5rem minmax(0, 1fr); }
   .project-figure { grid-column: 2; max-width: 22rem; }
   .repo-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -312,6 +331,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .nav a { display: inline-flex; align-items: center; min-height: 32px; }
   .controls { margin-left: auto; }
   .tracks { grid-template-columns: 1fr; }
+  .value-points { grid-template-columns: 1fr; gap: 20px; }
+  .result { grid-template-columns: 1fr; row-gap: 4px; }
   .track-it { padding-right: 0; border-right: 0; border-bottom: 1px solid var(--rule); }
   .track-data { padding-left: 0; }
   .project { grid-template-columns: 1fr; }

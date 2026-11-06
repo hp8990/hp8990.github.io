@@ -32,6 +32,69 @@ window.SITE = {
 };
 
 /*
+  "What I bring" section, shown right after the introduction.
+  points: what working with me looks like. results: proof, each linked to its project.
+  figureSr is what screen readers say instead of the figure, when the figure uses symbols.
+*/
+window.VALUE = {
+  points: [
+    {
+      title: { en: "LLM systems that stay under control", fr: "Des systèmes LLM sous contrôle" },
+      body: {
+        en: "I design the agent harness around the models: tools exposed through MCP, human approval steps and full audit trails, so automation stays safe, traceable and GDPR-compliant.",
+        fr: "Je conçois l'agent harness autour des modèles : outils exposés via MCP, étapes de validation humaine et journaux d'audit complets, pour une automatisation sûre, traçable et conforme au RGPD."
+      }
+    },
+    {
+      title: { en: "From business need to production", fr: "Du besoin métier à la production" },
+      body: {
+        en: "I run workshops with business teams, turn their requirements into detection scenarios and specifications, then deliver the pipeline, the model and the monitoring dashboards.",
+        fr: "J'anime des ateliers avec les équipes métier, je traduis leurs besoins en scénarios de détection et en spécifications, puis je livre le pipeline, le modèle et les tableaux de bord de suivi."
+      }
+    },
+    {
+      title: { en: "Infrastructure fluency", fr: "Une maîtrise de l'infrastructure" },
+      body: {
+        en: "Six years of Linux, Windows Server, networking and databases: I deploy on Azure, AWS or on-premise without handing off the hard parts.",
+        fr: "Six ans de Linux, Windows Server, réseaux et bases de données : je déploie sur Azure, AWS ou on-premise sans déléguer les parties difficiles."
+      }
+    },
+    {
+      title: { en: "Bilingual", fr: "Bilingue" },
+      body: {
+        en: "French native, English fluent (C1). I work with French and international teams alike.",
+        fr: "Français langue maternelle, anglais courant (C1). Je travaille aussi bien avec des équipes françaises qu'internationales."
+      }
+    }
+  ],
+  results: [
+    {
+      figure: "+40%",
+      figureFr: "+40\u00a0%",
+      label: { en: "return over 7 months", fr: "de rendement sur 7 mois" },
+      context: { en: "RAG decision engine for a trading group", fr: "Moteur de décision RAG pour un groupe de trading" },
+      project: "trading-rag"
+    },
+    {
+      figure: "~20%",
+      figureFr: "~20\u00a0%",
+      figureSr: { en: "nearly 20%", fr: "près de 20 %" },
+      label: { en: "alert conversion on certain scenarios", fr: "de transformation des alertes sur certains scénarios" },
+      context: { en: "Anomaly detection on billions of La Banque Postale transactions", fr: "Détection d'anomalies sur des milliards de transactions de La Banque Postale" },
+      project: "lbp-anomaly"
+    },
+    {
+      figure: "60% → 2%",
+      figureFr: "60\u00a0% → 2\u00a0%",
+      figureSr: { en: "from 60% to 2%", fr: "de 60 % à 2 %" },
+      label: { en: "dropped calls", fr: "d'appels perdus" },
+      context: { en: "After rebuilding a VoIP phone system", fr: "Après la refonte d'un système téléphonique VoIP" },
+      project: "sogema-voip"
+    }
+  ]
+};
+
+/*
   Projects.
   track: "it" | "data" | "ai"   (used by the filters)
   kind:  "client" | "personal"  (shown as a small label)

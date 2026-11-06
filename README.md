@@ -64,6 +64,7 @@ This repository is the source of the portfolio site, served by GitHub Pages at h
 | Section | Contents |
 | --- | --- |
 | Introduction | Who Hantz is, plus a live typing-rhythm demo based on his keystroke biometrics project |
+| What I bring | Four strengths and three measured results, each linked to its project |
 | What I do | Two tracks: systems, cloud & DevOps, and data science & AI, each with its main tools |
 | Selected work | Client projects and personal projects, filterable by IT & infrastructure, data science, or AI & LLMs |
 | Writing | Latest articles from [DEV](https://dev.to/hantz_peterthermoris_f64), loaded live |
@@ -78,7 +79,7 @@ Light and dark themes follow the visitor's system setting and can be switched ma
 | Path | What it holds |
 | --- | --- |
 | `index.html` | The single page of the site |
-| `assets/js/content.js` | **All portfolio content**: projects, timeline, articles, links and settings |
+| `assets/js/content.js` | **All portfolio content**: strengths and results, projects, timeline, articles, links and settings |
 | `assets/js/i18n.js` | Interface text (menus, buttons, messages) in English and French |
 | `assets/js/main.js` | Page behaviour: language and theme switch, project filters, GitHub and DEV loading, typing demo |
 | `assets/css/site.css` | All styles, including the dark theme |
@@ -92,6 +93,7 @@ Light and dark themes follow the visitor's system setting and can be switched ma
 
 Almost every change happens in `assets/js/content.js`. Each text field has an `en` and an `fr` version, so fill in both.
 
+- **What I bring:** edit `VALUE` in `content.js`. `points` are the strengths; `results` are the figures, each with a short label, a context line and the `id` of the project it links to.
 - **Add a project:** copy an entry in `PROJECTS`. Set `track` to `it`, `data` or `ai` (this drives the filters) and `kind` to `client` or `personal`. An `image` is optional; if you add one, give it an `imageAlt` description in both languages.
 - **Add a career step:** add an entry to `TIMELINE`, newest first. Mark education entries with `edu: true`.
 - **Articles:** new DEV posts appear on their own. `ARTICLES` is only the backup list shown when DEV can't be reached.

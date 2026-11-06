@@ -5,6 +5,7 @@
   var PROJECTS = window.PROJECTS || [];
   var TIMELINE = window.TIMELINE || [];
   var ARTICLES = window.ARTICLES || [];
+  var VALUE = window.VALUE || { points: [], results: [] };
   var I18N = window.I18N || {};
   var root = document.documentElement;
 
@@ -61,6 +62,7 @@
       n.textContent = "(" + t("pdf") + (size ? ", " + size : "") + ")";
     });
     renderProjects(false);
+    renderValue();
     renderTimeline();
     renderRepos();
     renderArticles();
@@ -182,6 +184,44 @@
       if (st) st.textContent = t("filter.status").replace("{n}", shown).replace("{total}", PROJECTS.length);
     });
   });
+
+  /* ---------------- What I bring ---------------- */
+  function renderValue() {
+    var pts = document.getElementById("valuePoints");
+    var res = document.getElementById("valueResults");
+    if (!pts || !res) return;
+    pts.textContent = ""; res.textContent = "";
+    VALUE.points.forEach(function (v) {
+      var li = el("li", "vpoint");
+      li.appendChild(el("h3", null, pick(v.title)));
+      li.appendChild(el("p", null, pick(v.body)));
+      pts.appendChild(li);
+    });
+    VALUE.results.forEach(function (r) {
+      var li = el("li", "result");
+      var fig = el("span", "result-figure", lang === "fr" && r.figureFr ? r.figureFr : r.figure);
+      var sr = pick(r.figureSr);
+      if (sr) {
+        fig.setAttribute("aria-hidden", "true");
+        li.appendChild(el("span", "visually-hidden", sr + " "));
+      }
+      li.appendChild(fig);
+      li.appendChild(el("span", "result-label", pick(r.label)));
+      var ctx = el("span", "result-context");
+      if (r.project && document.getElementById("project-" + r.project)) {
+        var a = el("a", null, pick(r.context));
+        a.href = "#project-" + r.project;
+        a.setAttribute("aria-label", pick(r.context) + ", " + t("value.see").toLowerCase());
+        ctx.appendChild(a);
+      } else {
+        ctx.textContent = pick(r.context);
+      }
+      li.appendChild(ctx);
+      res.appendChild(li);
+    });
+    var sec = document.getElementById("value");
+    if (sec) sec.hidden = !VALUE.points.length && !VALUE.results.length;
+  }
 
   /* ---------------- Timeline ---------------- */
   function renderTimeline() {
