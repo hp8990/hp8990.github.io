@@ -37,7 +37,7 @@ Light and dark themes follow the visitor's system setting and can be switched ma
 | `assets/css/site.css` | All styles, including the dark theme |
 | `assets/img/` | Portrait and project images |
 | `projects/` | Material linked from project entries: the generative AI genealogy map, the NBA analysis notebook, the iris-tracking script, and datasets in `projects/data/` |
-| `docs/` | Downloadable documents. Empty until a CV is added. |
+| `docs/` | Downloadable documents: the public version of the CV (PDF) |
 | `archive/` | Earlier drafts of the site, kept for reference and not linked from the homepage |
 | `ms70602493.txt` | Microsoft 365 domain verification file. It must stay at the root. |
 

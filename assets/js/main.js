@@ -56,7 +56,9 @@
       host.hidden = !cv;
     });
     document.querySelectorAll(".cv-link .file-info").forEach(function (n) {
-      n.textContent = "(" + t("pdf") + (SITE.cvSize ? ", " + SITE.cvSize : "") + ")";
+      var size = SITE.cvSize || "";
+      if (lang === "fr") size = size.replace(/\bKB\b/, "Ko").replace(/\bMB\b/, "Mo");
+      n.textContent = "(" + t("pdf") + (size ? ", " + size : "") + ")";
     });
     renderProjects(false);
     renderTimeline();

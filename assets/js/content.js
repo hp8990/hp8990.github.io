@@ -15,10 +15,10 @@ window.SITE = {
     kaggle: "https://www.kaggle.com/thermorishantzpeter",
     devto: "https://dev.to/hantz_peterthermoris_f64",
     // Path to your CV PDF, e.g. "docs/Hantz-Peter-Thermoris-CV.pdf". Leave empty to hide the CV buttons.
-    cv: ""
+    cv: "docs/Hantz-Peter-Thermoris-CV.pdf"
   },
   // Shown next to CV links for accessibility. Update if you replace the PDF.
-  cvSize: ""
+  cvSize: "75 KB"
 };
 
 /*
