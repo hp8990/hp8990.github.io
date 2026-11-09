@@ -263,7 +263,7 @@
     if (cl) {
       var li = el("li"); var a = el("a", null, SITE.email);
       a.href = "mailto:" + SITE.email; li.appendChild(a);
-      cl.insertBefore(li, cl.children[1] || null);
+      cl.insertBefore(li, cl.firstChild);   // email is the main way to reach me
     }
   }
 

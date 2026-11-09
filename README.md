@@ -19,7 +19,7 @@ Before data science, I spent six years running servers, networks and phone syste
 
 **Certifications:** AWS Certified AI Practitioner; Microsoft Certified: Azure Data Scientist Associate, Power BI Data Analyst Associate, Azure Fundamentals, Azure AI Fundamentals.
 
-**Find me:** [LinkedIn](https://www.linkedin.com/in/hantz-peter-b-thermoris/) | [Articles on DEV](https://dev.to/hantz_peterthermoris_f64) | CV in [English](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-EN.pdf) or [French](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-FR.pdf)
+**Find me:** [contact@hantzthermoris.com](mailto:contact@hantzthermoris.com) | [LinkedIn](https://www.linkedin.com/in/hantz-peter-b-thermoris/) | [Articles on DEV](https://dev.to/hantz_peterthermoris_f64) | CV in [English](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-EN.pdf) or [French](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-FR.pdf)
 
 ---
 
@@ -43,7 +43,7 @@ Avant la data science, j'ai passé six ans à administrer des serveurs, des rés
 
 **Certifications :** AWS Certified AI Practitioner ; Microsoft Certified : Azure Data Scientist Associate, Power BI Data Analyst Associate, Azure Fundamentals, Azure AI Fundamentals.
 
-**Me retrouver :** [LinkedIn](https://www.linkedin.com/in/hantz-peter-b-thermoris/) | [Articles sur DEV](https://dev.to/hantz_peterthermoris_f64) | CV en [français](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-FR.pdf) ou en [anglais](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-EN.pdf)
+**Me retrouver :** [contact@hantzthermoris.com](mailto:contact@hantzthermoris.com) | [LinkedIn](https://www.linkedin.com/in/hantz-peter-b-thermoris/) | [Articles sur DEV](https://dev.to/hantz_peterthermoris_f64) | CV en [français](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-FR.pdf) ou en [anglais](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-EN.pdf)
 
 ---
 
@@ -101,7 +101,7 @@ Almost every change happens in `assets/js/content.js`. Each text field has an `e
 - **Writing on this site:** pieces hosted here, like the genealogy map, go in `WRITING_PINNED` in `content.js` and always show in the Writing section.
 - **Articles:** new DEV posts appear on their own. `ARTICLES` is only the backup list shown when DEV can't be reached.
 - **Update the CV:** the site offers the CV in the page language: `docs/Hantz-Peter-Thermoris-CV-EN.pdf` on the English page and `docs/Hantz-Peter-Thermoris-CV-FR.pdf` on the French page. Replace a file under the same name and update its `cvSize`. Leave `cv` empty to hide the CV buttons.
-- **Show an email address:** set `email`. It stays hidden while empty.
+- **Email address:** `email` in `content.js` (contact@hantzthermoris.com, forwarded to Gmail by Cloudflare Email Routing). Leave it empty to hide it.
 - **Show GitHub or Kaggle:** set `links.github` or `links.kaggle` to add them to the contact section, and `githubUser` plus `githubRepos` to show a "Latest on GitHub" section listing only the repositories you name. All of these are empty for now.
 - **Change interface text** such as menu labels or button names in `assets/js/i18n.js`.
 

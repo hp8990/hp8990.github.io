@@ -13,7 +13,7 @@ window.SITE = {
   // DEV (dev.to) username: the Writing section loads the latest articles live
   devtoUser: "hantz_peterthermoris_f64",
   // Leave empty to hide the email link. Example: "prenom.nom@example.com"
-  email: "",
+  email: "contact@hantzthermoris.com",
   links: {
     linkedin: "https://www.linkedin.com/in/hantz-peter-b-thermoris/",
     // Leave a link empty to hide it from the contact section.
