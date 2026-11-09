@@ -1,7 +1,7 @@
 # Hantz Peter B. Thermoris
 
 **Data Scientist and AI Engineer (LLM), based in France.**
-Portfolio: https://hp8990.github.io | [Version française](#version-française)
+Portfolio: https://hantzthermoris.com | [Version française](#version-française)
 
 ## Who I am
 
@@ -19,7 +19,7 @@ Before data science, I spent six years running servers, networks and phone syste
 
 **Certifications:** AWS Certified AI Practitioner; Microsoft Certified: Azure Data Scientist Associate, Power BI Data Analyst Associate, Azure Fundamentals, Azure AI Fundamentals.
 
-**Find me:** [LinkedIn](https://www.linkedin.com/in/hantz-peter-b-thermoris/) | [Articles on DEV](https://dev.to/hantz_peterthermoris_f64) | CV in [English](https://hp8990.github.io/docs/Hantz-Peter-Thermoris-CV-EN.pdf) or [French](https://hp8990.github.io/docs/Hantz-Peter-Thermoris-CV-FR.pdf)
+**Find me:** [LinkedIn](https://www.linkedin.com/in/hantz-peter-b-thermoris/) | [Articles on DEV](https://dev.to/hantz_peterthermoris_f64) | CV in [English](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-EN.pdf) or [French](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-FR.pdf)
 
 ---
 
@@ -43,13 +43,13 @@ Avant la data science, j'ai passé six ans à administrer des serveurs, des rés
 
 **Certifications :** AWS Certified AI Practitioner ; Microsoft Certified : Azure Data Scientist Associate, Power BI Data Analyst Associate, Azure Fundamentals, Azure AI Fundamentals.
 
-**Me retrouver :** [LinkedIn](https://www.linkedin.com/in/hantz-peter-b-thermoris/) | [Articles sur DEV](https://dev.to/hantz_peterthermoris_f64) | CV en [français](https://hp8990.github.io/docs/Hantz-Peter-Thermoris-CV-FR.pdf) ou en [anglais](https://hp8990.github.io/docs/Hantz-Peter-Thermoris-CV-EN.pdf)
+**Me retrouver :** [LinkedIn](https://www.linkedin.com/in/hantz-peter-b-thermoris/) | [Articles sur DEV](https://dev.to/hantz_peterthermoris_f64) | CV en [français](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-FR.pdf) ou en [anglais](https://hantzthermoris.com/docs/Hantz-Peter-Thermoris-CV-EN.pdf)
 
 ---
 
 # About this repository
 
-This repository is the source of the portfolio site, served by GitHub Pages at https://hp8990.github.io.
+This repository is the source of the portfolio site, served by GitHub Pages at https://hantzthermoris.com (the old address, hp8990.github.io, redirects there).
 
 ## Goals of the site
 
@@ -87,6 +87,7 @@ Light and dark themes follow the visitor's system setting and can be switched ma
 | `projects/` | Material linked from the site: the generative AI genealogy map in English and French (shown under Writing), the NBA analysis notebook, and datasets in `projects/data/` |
 | `docs/` | The public CV in English and French (PDF) |
 | `archive/` | Earlier drafts of the site, kept for reference and not linked from the homepage |
+| `CNAME` | Tells GitHub Pages to serve the site at hantzthermoris.com. Don't delete it. |
 | `ms70602493.txt` | Microsoft 365 domain verification file. It must stay at the root. |
 
 ## Updating the content
