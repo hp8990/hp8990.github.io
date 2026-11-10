@@ -24,6 +24,15 @@
   }
 
   /* ---------------- Language ---------------- */
+  // Puts text in an element; **double asterisks** become bold. Never parses HTML.
+  function setRich(node, text) {
+    if (text.indexOf("**") === -1) { node.textContent = text; return; }
+    node.textContent = "";
+    text.split("**").forEach(function (part, i) {
+      if (!part) return;
+      node.appendChild(i % 2 ? el("strong", null, part) : document.createTextNode(part));
+    });
+  }
   var lang = root.lang === "fr" ? "fr" : "en";
   function t(key) { return (I18N[lang] && I18N[lang][key]) || (I18N.en && I18N.en[key]) || ""; }
   function pick(v) { return v == null ? "" : (typeof v === "string" ? v : (v[lang] || v.en || "")); }
@@ -31,7 +40,7 @@
   function applyLang() {
     root.lang = lang;
     document.querySelectorAll("[data-i18n]").forEach(function (n) {
-      var v = t(n.getAttribute("data-i18n")); if (v) n.textContent = v;
+      var v = t(n.getAttribute("data-i18n")); if (v) setRich(n, v);
     });
     document.querySelectorAll("[data-i18n-placeholder]").forEach(function (n) {
       n.setAttribute("placeholder", t(n.getAttribute("data-i18n-placeholder")));

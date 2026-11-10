@@ -1,4 +1,5 @@
-/* Interface strings. Keys match data-i18n attributes in index.html. */
+/* Interface strings. Keys match data-i18n attributes in index.html.
+   Wrap words in **double asterisks** to show them in bold. */
 window.I18N = {
   en: {
     "harness.title": "Agent harness, live",
@@ -45,7 +46,7 @@ window.I18N = {
     "contact.blog": "Blog on DEV",
     "nav.contact": "Contact",
     "portraitAlt": "Portrait of Hantz Peter B. Thermoris",
-    "hero.lede": "Data scientist and LLM/AI engineer. Since 2022, machine learning in production: anomaly detection on billions of bank transactions, NLP and recommendation systems. Since 2025, LLM systems: RAG decision engines, multi-agent pipelines and the agent harnesses that keep them under control, with human review. Before that, six years running servers and networks.",
+    "hero.lede": "Data scientist – LLM/AI engineer. **Since 2022, data science and machine learning** in production: anomaly detection on billions of bank transactions, NLP and recommendation systems. **Since 2025, LLM systems**: RAG decision engines, multi-agent pipelines and the agent harnesses that keep them under control, with human review. **Before that, six years** running servers and networks.",
     "hero.work": "See my work",
     "hero.cv": "Download CV",
     "tracks.title": "What I do",
@@ -130,7 +131,7 @@ window.I18N = {
     "writing.onSite": "Page interactive",
     "nav.contact": "Contact",
     "portraitAlt": "Portrait de Hantz Peter B. Thermoris",
-    "hero.lede": "Data scientist et ingénieur LLM/IA. Depuis 2022, du machine learning en production : détection d'anomalies sur des milliards de transactions bancaires, NLP et systèmes de recommandation. Depuis 2025, des systèmes LLM : moteurs de décision RAG, pipelines multi-agents et agent harness pour les encadrer, avec validation humaine. Auparavant, six ans d'administration de serveurs et de réseaux.",
+    "hero.lede": "Data scientist – ingénieur LLM/IA. **Depuis 2022, data science et machine learning** en production : détection d'anomalies sur des milliards de transactions bancaires, NLP et systèmes de recommandation. **Depuis 2025, des systèmes LLM** : moteurs de décision RAG, pipelines multi-agents et agent harness pour les encadrer, avec validation humaine. **Auparavant, six ans** d'administration de serveurs et de réseaux.",
     "hero.work": "Voir mes projets",
     "hero.cv": "Télécharger le CV",
     "tracks.title": "Ce que je fais",

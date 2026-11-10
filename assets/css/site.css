@@ -135,6 +135,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   letter-spacing: -0.025em;
 }
 .lede { margin-top: 24px; max-width: 34em; color: var(--slate); font-size: 1.1875rem; line-height: 1.55; }
+.lede strong { color: var(--ink); font-weight: 600; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .btn {
   display: inline-flex; align-items: center; gap: 0.3em; min-height: 44px; padding: 0 20px;
